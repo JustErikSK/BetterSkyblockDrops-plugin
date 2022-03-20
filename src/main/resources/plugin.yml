@@ -1,6 +1,6 @@
 name: Skyblockdrops
-version: 1.0
+version: 1.1
 main: me.minecraft.plugin.skyblockdrops.Skyblockdrops
 api-version: 1.18
 authors: [ JustErikSK ]
-description: This plugin brings back original loot for zombies, blazes, husks, wither skeletons and withers from 1.12 skyblock map made by Astavie.
+description: This plugin brings back original loot for zombies, blazes, husks and wither skeletons from 1.12 skyblock map made by Astavie. We also added new drops for withers and zombified piglins.
