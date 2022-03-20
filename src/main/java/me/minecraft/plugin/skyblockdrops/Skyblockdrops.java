@@ -9,8 +9,8 @@ public final class Skyblockdrops extends JavaPlugin {
     @Override
     public void onEnable() {
         Bukkit.broadcastMessage(ChatColor.GREEN + this.getName() + " >> Plugin has been enabled!");
-        Bukkit.broadcastMessage(ChatColor.YELLOW + "Zombies, Blazes, Husks, Wither Skeletons and Withers now have a chance of " +
-                "dropping loot from original 1.12 skyblock!");
+        Bukkit.broadcastMessage(ChatColor.YELLOW + "List of drops: Zombies drop gravel, Husks drop sand, Blazes drop quartz," +
+                " Wither Skeletons drop soul sand, Withers drop ancient debris and Zombified Piglins drop magma cream!");
         this.getServer().getPluginManager().registerEvents(new MobDrops(), this);
     }
 
