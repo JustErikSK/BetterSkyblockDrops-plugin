@@ -7,6 +7,8 @@ This plugin brings back original loot for zombies, blazes, husks, wither skeleto
 
 Download OriginalSkyblockDrops plugin from GitHub Releases: https://github.com/JustErikSK/OriginalSkyblockDrops/releases.
 
+**OR**
+
 Download OriginalSkyblockDrops plugin from Spigot: https://www.spigotmc.org/resources/original-skyblock-drops.100746/.
   
 2. Drop it in your server's plugin folder.
