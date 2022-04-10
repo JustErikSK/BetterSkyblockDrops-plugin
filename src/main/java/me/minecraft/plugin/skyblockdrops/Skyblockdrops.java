@@ -3,8 +3,6 @@ package me.minecraft.plugin.skyblockdrops;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -24,7 +22,6 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "CONSOLE ONLY : OriginalSkyblockDrops >> Plugin has been enabled!");
         Bukkit.broadcastMessage(ChatColor.YELLOW + "List of drops: Zombies drop gravel, Husks drop sand, Blazes drop quartz," +
                 " Wither Skeletons drop soul sand, Withers drop ancient debris and Zombified Piglins drop magma cream!");
-        //this.getServer().getPluginManager().registerEvents(new MobDrops(), this);
         this.getServer().getPluginManager().registerEvents(this, this);
         saveDefaultConfig();
 
@@ -51,42 +48,84 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().disablePlugin(this);
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (label.equalsIgnoreCase("skyblockdrops")) {
-            if (!sender.hasPermission("skyblockdrops.reload")) {
-                sender.sendMessage(ChatColor.RED + "You don't have permissions to use this command!");
-                return true;
-            }
-            if (args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "Usage: /skyblockdrops reload");
-                return true;
-            }
-            if (args.length > 0) {
-                if (args[0].equalsIgnoreCase("reload")) {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                            this.getConfig().getString("reload_message")));
-                }
-                    this.reloadConfig();
-            }
-        }return false;
-    }
-
     @EventHandler
     public void onMobKill(EntityDeathEvent e) {
 
         int gravel_perc = this.getConfig().getInt("gravel_perc", 20);
         int gravel_amount = this.getConfig().getInt("gravel_amount", 1);
+        int sand_perc = this.getConfig().getInt("sand_perc", 20);
+        int sand_amount = this.getConfig().getInt("sand_amount", 1);
+        int quartz_perc = this.getConfig().getInt("quartz_perc", 20);
+        int quartz_amount = this.getConfig().getInt("quartz_amount", 20);
+        int soul_sand_perc = this.getConfig().getInt("soul_sand_perc", 20);
+        int soul_sand_amount = this.getConfig().getInt("soul_sand_amount", 20);
+        int ancient_debris_perc = this.getConfig().getInt("ancient_debris_perc", 20);
+        int ancient_debris_amount = this.getConfig().getInt("ancient_debris_amount", 20);
+        int magma_cream_perc = this.getConfig().getInt("magma_cream_perc", 20);
+        int magma_cream_amount = this.getConfig().getInt("magma_cream_amount", 20);
 
         LivingEntity entity = e.getEntity();
         Random random = new Random();
 
         ItemStack drop1 = new ItemStack(Material.GRAVEL, gravel_amount);
+        ItemStack drop2 = new ItemStack(Material.SAND, sand_amount);
+        ItemStack drop3 = new ItemStack(Material.QUARTZ, quartz_amount);
+        ItemStack drop4 = new ItemStack(Material.SOUL_SAND, soul_sand_amount);
+        ItemStack drop5 = new ItemStack(Material.ANCIENT_DEBRIS, ancient_debris_amount);
+        ItemStack drop6 = new ItemStack(Material.MAGMA_CREAM, magma_cream_amount);
 
-        if (entity.getType() == EntityType.ZOMBIE) {
-            int number1 = random.nextInt(100);
-            if (number1 < gravel_perc) {
-                e.getDrops().add(drop1);
+        // IF PERCENTAGE IS MORE THAN 100 OR LESS THAN 1, DEFAULT VALUE WILL BE ACTIVE
+        // IF AMOUNT IS MORE THAN 10 OR LESS THAN 1, ONLY VANILLA DROPS WILL BE APPLIED
+
+        if (entity.getType() == EntityType.ZOMBIE) { // GRAVEL
+            int number = random.nextInt(100);
+            if (gravel_perc > 100 || gravel_perc < 1) {
+                gravel_perc = 20; // USE DEFAULT PERCENTAGE
+            } if (number <= gravel_perc) {
+                if (gravel_amount <= 10) {
+                    e.getDrops().add(drop1); // GRAVEL DROP
+                }
             }
-        }
+        if (entity.getType() == EntityType.HUSK) { // SAND
+            if (sand_perc > 100 || sand_perc < 1) {
+                sand_perc = 20; // USE DEFAULT PERCENTAGE
+            } if (number <= sand_perc) {
+                if (sand_amount <= 10) {
+                    e.getDrops().add(drop2); // SAND DROP
+                }
+            }
+        if (entity.getType() == EntityType.BLAZE) { // QUARTZ
+            if (quartz_perc > 100 || quartz_perc < 1) {
+                quartz_perc = 20; // USE DEFAULT PERCENTAGE
+            } if (number <= quartz_perc) {
+                if (quartz_amount <= 10) {
+                    e.getDrops().add(drop3); // QUARTZ DROP
+                }
+            }
+        if (entity.getType() == EntityType.WITHER_SKELETON) { // SOUL SAND
+            if (soul_sand_perc > 100 || soul_sand_perc < 1) {
+                soul_sand_perc = 20; // USE DEFAULT PERCENTAGE
+            } if (number <= soul_sand_perc) {
+                if (soul_sand_amount <= 10) {
+                    e.getDrops().add(drop4); // SOUL SAND DROP
+                }
+            }
+        if (entity.getType() == EntityType.WITHER) { // ANCIENT DEBRIS
+            if (ancient_debris_perc > 100 || ancient_debris_perc < 1) {
+                ancient_debris_perc = 100; // USE DEFAULT PERCENTAGE
+            } if (number <= ancient_debris_perc)  {
+                if (ancient_debris_amount <= 10) {
+                    e.getDrops().add(drop5); // ANCIENT DEBRIS DROP
+                }
+            }
+        if (entity.getType() == EntityType.ZOMBIFIED_PIGLIN) { // MAGMA CREAM
+            if (magma_cream_perc > 100 || magma_cream_perc < 1) {
+                magma_cream_perc = 15; // USE DEFAULT PERCENTAGE
+            } if (number <= magma_cream_perc) {
+                if (magma_cream_amount <= 10) {
+                    e.getDrops().add(drop6); // MAGMA CREAM DROP
+                }
+            }
+        }}}}}}
     }
 }
