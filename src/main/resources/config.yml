@@ -1,43 +1,45 @@
 # Configuration file for OriginalSkyblockDrops plugin
 # You can set your own drop percentages and drop amounts here
-# Only change numbers
 
 
-# Gravel drop percentage - Zombies (Default = 20%, Min: 1, Max: 100)
-gravel-perc : 20
+# Gravel drop percentage - Zombies (Default = 20, Min: 1, Max: 100)
+gravel_perc : 20
 
 # Gravel drop amount - Zombies (Default = 1, Min: 1, Max: 10)
-gravel-amount: 1
+gravel_amount: 1
 
-# Sand drop percentage - Husks (Default = 20%, Min: 1, Max: 100)
-sand-perc : 20
+# Sand drop percentage - Husks (Default = 20, Min: 1, Max: 100)
+sand_perc : 20
 
 # Sand drop amount - Husks (Default = 1, Min: 1, Max: 10)
-sand-amount : 1
+sand_amount : 1
 
-# Quartz drop percentage - Blazes (Default = 20%, Min: 1, Max: 100)
-quartz-perc : 20
+# Quartz drop percentage - Blazes (Default = 20, Min: 1, Max: 100)
+quartz_perc : 20
 
 # Quartz drop amount - Blazes (Default = 1, Min: 1, Max: 10)
-quartz-amount : 1
+quartz_amount : 1
 
-# Soul Sand drop percentage - Wither Skeletons (Default = 20%, Min: 1, Max: 100)
-soul_sand-perc : 20
+# Soul Sand drop percentage - Wither Skeletons (Default = 20, Min: 1, Max: 100)
+soul_sand_perc : 20
 
 # Soul Sand drop amount - Wither Skeletons(Default = 1, Min: 1, Max: 10)
-soul_sand-amount : 1
+soul_sand_amount : 1
 
-# Ancient Debris drop percentage (Default = 100%, Min: 1, Max: 100)
-ancient_debris-perc : 100
+# Ancient Debris drop percentage (Default = 100, Min: 1, Max: 100)
+ancient_debris_perc : 100
 
 # Ancient Debris drop amount (Default = 2, Min: 1, Max: 10)
-ancient_debris-amount : 2
+ancient_debris_amount : 2
 
-# Magma Cream drop percentage (Default = 15%, Min: 1, Max: 100)
-magma_cream-perc : 15
+# Magma Cream drop percentage (Default = 15, Min: 1, Max: 100)
+magma_cream_perc : 15
 
 # Magma Cream drop amount(Default = 1, Min: 1, Max: 10)
-magma_cream-amount : 1
+magma_cream_amount : 1
+
+
+reload_message : "&9Reloaded OriginalSkyblockDrops Config"
 
 
 # End of config file
