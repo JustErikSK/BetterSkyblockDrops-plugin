@@ -22,7 +22,7 @@ public class MobDrops implements Listener {
         ItemStack drop3 = new ItemStack(Material.SAND,1);
         ItemStack drop4 = new ItemStack(Material.SOUL_SAND,1);
         ItemStack drop5 = new ItemStack(Material.ANCIENT_DEBRIS,2);
-        ItemStack drop6 = new ItemStack(Material.MAGMA_CREAM, 2);
+        ItemStack drop6 = new ItemStack(Material.MAGMA_CREAM, 1);
 
         if (entity.getType() == EntityType.ZOMBIE) {
             int number1 = random.nextInt(100);
@@ -48,7 +48,7 @@ public class MobDrops implements Listener {
             event.getDrops().add(drop5);
         } else if (entity.getType() == EntityType.ZOMBIFIED_PIGLIN) {
             int number5 = random.nextInt(100);
-            if (number5 < 25) {
+            if (number5 < 15) {
                 event.getDrops().add(drop6);
             }
         }
