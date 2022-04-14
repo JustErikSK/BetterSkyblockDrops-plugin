@@ -1,5 +1,6 @@
 # Configuration file for OriginalSkyblockDrops plugin
 # You can set your own drop percentages and drop amounts here
+# If you set a number that's more/less than the set maximum/minimum, plugin will automatically use default value
 
 
 # Gravel drop percentage - Zombies (Default = 20, Min: 1, Max: 100)
