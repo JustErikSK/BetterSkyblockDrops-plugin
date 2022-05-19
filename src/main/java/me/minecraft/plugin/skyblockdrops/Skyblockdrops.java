@@ -38,7 +38,6 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         config.addDefault("ancient_debris_amount", 2);
         config.addDefault("magma_cream_perc", 15);
         config.addDefault("magma_cream_amount", 1);
-        //config.addDefault("reload_message","&9Reloaded OriginalSkyblockDrops Config");
     }
 
     @Override
