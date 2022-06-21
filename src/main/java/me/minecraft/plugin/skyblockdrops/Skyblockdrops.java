@@ -50,6 +50,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
     @EventHandler
     public void onMobKill(EntityDeathEvent e) {
 
+        //  GET DEFAULT VALUES FOR ALL DROPS
         int gravel_perc = this.getConfig().getInt("gravel_perc", 20);
         int gravel_amount = this.getConfig().getInt("gravel_amount", 1);
         int sand_perc = this.getConfig().getInt("sand_perc", 20);
