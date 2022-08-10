@@ -60,7 +60,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         int soul_sand_perc = this.getConfig().getInt("soul_sand_perc", 20);
         int soul_sand_amount = this.getConfig().getInt("soul_sand_amount", 1);
         int ancient_debris_perc = this.getConfig().getInt("ancient_debris_perc", 100);
-        int ancient_debris_amount = this.getConfig().getInt("ancient_debris_amount", 2);
+        int ancient_debris_amount = this.getConfig().getInt("ancient_debris_amount", 4);
         int magma_cream_perc = this.getConfig().getInt("magma_cream_perc", 15);
         int magma_cream_amount = this.getConfig().getInt("magma_cream_amount", 1);
 
@@ -125,7 +125,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
                 ancient_debris_perc = 100; // USE DEFAULT PERCENTAGE
             }
             if (ancient_debris_amount > 10 || ancient_debris_amount < 1) {
-                ancient_debris_amount = 1; // USE DEFAULT AMOUNT
+                ancient_debris_amount = 4; // USE DEFAULT AMOUNT
             }
             if (number <= ancient_debris_perc) {
                 e.getDrops().add(new ItemStack(Material.ANCIENT_DEBRIS, ancient_debris_amount)); // ANCIENT DEBRIS DROP

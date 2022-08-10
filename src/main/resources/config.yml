@@ -31,7 +31,7 @@ soul_sand_amount : 1
 ancient_debris_perc : 100
 
 # Ancient Debris drop amount (Default = 2, Min: 1, Max: 10)
-ancient_debris_amount : 2
+ancient_debris_amount : 4
 
 # Magma Cream drop percentage (Default = 15, Min: 1, Max: 100)
 magma_cream_perc : 15
