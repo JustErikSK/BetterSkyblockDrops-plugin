@@ -45,7 +45,7 @@ ancient_debris_disable: false
 # Magma Cream drops from Zombified Piglins
 # Magma Cream drop percentage (Default = 15, Min: 1, Max: 100)
 # Magma Cream drop amount (Default = 1, Min: 1, Max: 10)
-# Magma Cream drop disable/enable (false = drop enabled , true disabled)
+# Magma Cream drop disable/enable (false = drop enabled , true = drop disabled)
 magma_cream_perc : 15
 magma_cream_amount : 1
 magma_cream_disable: false
