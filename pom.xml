@@ -6,7 +6,7 @@
 
     <groupId>me.minecraft.plugin</groupId>
     <artifactId>skyblockdrops</artifactId>
-    <version>1.2_1.19.4</version>
+    <version>1.2_1.19.4 </version>
     <packaging>jar</packaging>
 
     <name>Skyblockdrops</name>
