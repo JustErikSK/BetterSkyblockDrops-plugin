@@ -78,6 +78,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
         int number = random.nextInt(100);
 
+        // DROPS WILL WORK ONLY IF THE DISABLE OPTION IS SET TO FALSE IN CONFIG.YML
         // IF PERCENTAGE IS MORE THAN 100 OR LESS THAN 1, DEFAULT VALUE WILL BE ACTIVE
         // IF AMOUNT IS MORE THAN 10 OR LESS THAN 1, ONLY VANILLA DROPS WILL BE APPLIED
 
