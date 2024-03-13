@@ -1,6 +1,6 @@
 name: Skyblockdrops
-version: 1.2_1.19.4
+version: 1.2_1.20
 main: me.minecraft.plugin.skyblockdrops.Skyblockdrops
-api-version: 1.19
+api-version: 1.20
 authors: [ JustErikSK ]
 description: This plugin brings new loot for zombies, blazes, husks and wither skeletons. We also added new drops for withers and zombified piglins.
