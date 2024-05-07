@@ -18,7 +18,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "OriginalSkyblockDrops >> Plugin has been enabled!");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "Better Skyblock Drops >> Plugin has been enabled!");
 
         this.getServer().getPluginManager().registerEvents(this, this);
         saveDefaultConfig();
@@ -46,7 +46,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "OriginalSkyblockDrops >> Plugin has been disabled!");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Better Skyblock Drops >> Plugin has been disabled!");
         this.getServer().getPluginManager().disablePlugin(this);
     }
 
