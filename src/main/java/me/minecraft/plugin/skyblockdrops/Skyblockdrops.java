@@ -36,12 +36,6 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         config.addDefault("soul_sand_perc", 20);
         config.addDefault("soul_sand_amount", 1);
         config.addDefault("soul_sand_disable", false);
-        config.addDefault("ancient_debris_perc", 100);
-        config.addDefault("ancient_debris_amount", 4);
-        config.addDefault("ancient_debris_disable", false);
-        config.addDefault("magma_cream_perc", 15);
-        config.addDefault("magma_cream_amount", 1);
-        config.addDefault("magma_cream_disable", false);
     }
 
     @Override
@@ -66,9 +60,6 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         int soul_sand_perc = this.getConfig().getInt("soul_sand_perc", 20);
         int soul_sand_amount = this.getConfig().getInt("soul_sand_amount", 1);
         String soul_sand_disable = this.getConfig().getString("soul_sand_disable", "false");
-        int magma_cream_perc = this.getConfig().getInt("magma_cream_perc", 15);
-        int magma_cream_amount = this.getConfig().getInt("magma_cream_amount", 1);
-        String magma_cream_disable = this.getConfig().getString("magma_cream_disable", "false");
 
         LivingEntity entity = e.getEntity();
         Random random = new Random();
@@ -124,18 +115,6 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
             }
             if (number <= soul_sand_perc) {
                 e.getDrops().add(new ItemStack(Material.SOUL_SAND, soul_sand_amount)); // SOUL SAND DROP
-            }
-        }
-
-        if (entity.getType() == EntityType.PIG_ZOMBIE && magma_cream_disable.equals("false")) { // MAGMA CREAM
-            if (magma_cream_perc > 100 || magma_cream_perc < 1) {
-                magma_cream_perc = 15; // USE DEFAULT PERCENTAGE
-            }
-            if (magma_cream_amount > 10 || magma_cream_amount < 1) {
-                magma_cream_amount = 1; // USE DEFAULT AMOUNT
-            }
-            if (number <= magma_cream_perc) {
-                e.getDrops().add(new ItemStack(Material.MAGMA_CREAM, magma_cream_amount)); // MAGMA CREAM DROP
             }
         }
     }
