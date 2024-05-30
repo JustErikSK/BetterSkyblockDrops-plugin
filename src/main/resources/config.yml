@@ -34,14 +34,6 @@ soul_sand_perc : 20
 soul_sand_amount : 1
 soul_sand_disable: false
 
-# Ancient Debris drops from Withers
-# Ancient Debris drop percentage (Default = 100, Min: 1, Max: 100)
-# Ancient Debris drop amount (Default = 2, Min: 1, Max: 10)
-# Ancient Debris drop disable/enable (false = drop enabled , true = drop disabled)
-ancient_debris_perc : 100
-ancient_debris_amount : 4
-ancient_debris_disable: false
-
 # Magma Cream drops from Zombified Piglins
 # Magma Cream drop percentage (Default = 15, Min: 1, Max: 100)
 # Magma Cream drop amount (Default = 1, Min: 1, Max: 10)
