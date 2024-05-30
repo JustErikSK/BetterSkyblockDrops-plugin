@@ -7,14 +7,17 @@ _(Plugin was originaly called OriginalSkyblockDrops but I decided to change it t
 
 1. Use one of these download options:
 
-Download Better Skyblock Drops plugin from GitHub Releases: 
+Download BetterSkyblockDrops plugin from GitHub Releases: 
 - https://github.com/JustErikSK/OriginalSkyblockDrops/releases.
 
-Download Better Skyblock Drops plugin from Spigot: 
+(or) Download BetterSkyblockDrops plugin from Spigot: 
 - https://www.spigotmc.org/resources/original-skyblock-drops.100746/.
 
-Download Better Skyblock Drops plugin from CurseForge:
+(or) Download BetterSkyblockDrops plugin from CurseForge:
 - https://www.curseforge.com/minecraft/bukkit-plugins/better-skyblock-drops.
+
+(or) Download BetterSkyblockDrops plugin from Modrinth:
+- https://modrinth.com/plugin/better-skyblock-drops
   
 2. Drop it in your server's plugin folder.
   
