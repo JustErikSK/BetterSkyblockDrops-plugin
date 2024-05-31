@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -57,9 +58,6 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         int quartz_perc = this.getConfig().getInt("quartz_perc", 20);
         int quartz_amount = this.getConfig().getInt("quartz_amount", 1);
         String quartz_disable = this.getConfig().getString("quartz_disable", "false");
-        int soul_sand_perc = this.getConfig().getInt("soul_sand_perc", 20);
-        int soul_sand_amount = this.getConfig().getInt("soul_sand_amount", 1);
-        String soul_sand_disable = this.getConfig().getString("soul_sand_disable", "false");
 
         LivingEntity entity = e.getEntity();
         Random random = new Random();
@@ -82,7 +80,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
             }
         }
 
-        if (entity.getType() == EntityType.HUSK && sand_disable.equals("false")) { // SAND
+        if (entity.getType() == EntityType.SKELETON && sand_disable.equals("false")) { // SAND
             if (sand_perc > 100 || sand_perc < 1) {
                 sand_perc = 20; // USE DEFAULT PERCENTAGE
             }
@@ -103,18 +101,6 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
             }
             if (number <= quartz_perc) {
                 e.getDrops().add(new ItemStack(Material.QUARTZ, quartz_amount)); // QUARTZ DROP
-            }
-        }
-
-        if (entity.getType() == EntityType.WITHER_SKELETON && soul_sand_disable.equals("false")) { // SOUL SAND
-            if (soul_sand_perc > 100 || soul_sand_perc < 1) {
-                soul_sand_perc = 20; // USE DEFAULT PERCENTAGE
-            }
-            if (soul_sand_amount > 10 || soul_sand_amount < 1) {
-                soul_sand_amount = 1; // USE DEFAULT AMOUNT
-            }
-            if (number <= soul_sand_perc) {
-                e.getDrops().add(new ItemStack(Material.SOUL_SAND, soul_sand_amount)); // SOUL SAND DROP
             }
         }
     }

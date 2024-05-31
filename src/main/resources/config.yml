@@ -26,12 +26,4 @@ quartz_perc : 20
 quartz_amount : 1
 quartz_disable: false
 
-# Soul Sand drops from Wither Skeletons
-# Soul Sand drop percentage (Default = 20, Min: 1, Max: 100)
-# Soul Sand drop amount (Default = 1, Min: 1, Max: 10)
-# Soul Sand drop disable/enable (false = drop enabled , true = drop disabled)
-soul_sand_perc : 20
-soul_sand_amount : 1
-soul_sand_disable: false
-
 # End of config file
