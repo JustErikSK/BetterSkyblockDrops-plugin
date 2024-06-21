@@ -23,7 +23,7 @@ Download BetterSkyblockDrops plugin from GitHub Releases:
   
 3. Start the server, plugin will automatically load.
   
-Enjoy your skyblock experience with friends!
+After first server start with our plugin, new folder with a config file will be created in your server's plugins folder to change the drop amounts, percentages and/or disable / enable drops.
 
 ## Our plugin is highly customizable, you can change your drop amounts and percentages with config.yml that is automatically created in your plugins folder! Version 1.3 adds option to fully disable / enable specific drops!
 ### All drop amounts and percentages have maximum and minimum set number, if you use for example 120% for gravel, the default value will be used, which is 20%.
