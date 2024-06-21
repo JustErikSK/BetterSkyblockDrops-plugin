@@ -25,13 +25,13 @@ Download BetterSkyblockDrops plugin from GitHub Releases:
   
 Enjoy your skyblock experience with friends!
 
-## You can also configure drop amounts and percentages in config.yml thanks to the 1.2 update!
-### You can now also fully disable and enable drops in config.yml thanks to the 1.3 update!
+## Our plugin is highly customizable, you can change your drop amounts and percentages with config.yml that is automatically created in your plugins folder! Version 1.3 adds option to fully disable / enable specific drops!
+### All drop amounts and percentages have maximum and minimum set number, if you use for example 120% for gravel, the default value will be used, which is 20%.
 
 **List drops (default values):**
-- Gravel from Zombies _(20% for 1)_
-- Sand from Husks _(20% for 1)_
-- Quartz from Blazes _(20% for 1)_
-- Soul Sand from Wither Skeletons _(20% for 1)_
-- Ancient Debris from Withers _(100% for 4)_
-- Magma Cream from Zombified Piglins _(15% for 1)_
+- **Gravel - from Zombies** _(20% for 1)_
+- **Quartz - from Blazes** _(20% for 1)_
+- **Sand - from Husks** _(20% for 1)_ - Sand drops from Skeletons in 1.10 and below
+- **Soul Sand - from Wither Skeletons** _(20% for 1)_ - 1.11 and above
+- **Ancient Debris - from Withers** _(100% for 4)_ - 1.16 and above
+- **Magma Cream - from Zombified Piglins** _(15% for 1)_ - 1.13 and above
