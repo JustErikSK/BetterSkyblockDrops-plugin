@@ -26,4 +26,28 @@ quartz_perc : 20
 quartz_amount : 1
 quartz_disable: false
 
+# Soul Sand drops from Wither Skeletons
+# Soul Sand drop percentage (Default = 20, Min: 1, Max: 100)
+# Soul Sand drop amount (Default = 1, Min: 1, Max: 10)
+# Soul Sand drop disable/enable (false = drop enabled , true = drop disabled)
+soul_sand_perc : 20
+soul_sand_amount : 1
+soul_sand_disable: false
+
+# Ancient Debris drops from Withers
+# Ancient Debris drop percentage (Default = 100, Min: 1, Max: 100)
+# Ancient Debris drop amount (Default = 2, Min: 1, Max: 10)
+# Ancient Debris drop disable/enable (false = drop enabled , true = drop disabled)
+ancient_debris_perc : 100
+ancient_debris_amount : 4
+ancient_debris_disable: false
+
+# Magma Cream drops from Zombified Piglins
+# Magma Cream drop percentage (Default = 15, Min: 1, Max: 100)
+# Magma Cream drop amount (Default = 1, Min: 1, Max: 10)
+# Magma Cream drop disable/enable (false = drop enabled , true = drop disabled)
+magma_cream_perc : 15
+magma_cream_amount : 1
+magma_cream_disable: false
+
 # End of config file

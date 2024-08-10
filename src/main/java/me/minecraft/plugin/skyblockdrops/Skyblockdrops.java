@@ -18,7 +18,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "Better Skyblock Drops >> Plugin has been enabled!");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "BetterSkyblockDrops >> Plugin has been enabled!");
 
         this.getServer().getPluginManager().registerEvents(this, this);
         saveDefaultConfig();
@@ -36,11 +36,17 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         config.addDefault("soul_sand_perc", 20);
         config.addDefault("soul_sand_amount", 1);
         config.addDefault("soul_sand_disable", false);
+        config.addDefault("ancient_debris_perc", 100);
+        config.addDefault("ancient_debris_amount", 4);
+        config.addDefault("ancient_debris_disable", false);
+        config.addDefault("magma_cream_perc", 15);
+        config.addDefault("magma_cream_amount", 1);
+        config.addDefault("magma_cream_disable", false);
     }
 
     @Override
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Better Skyblock Drops >> Plugin has been disabled!");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "BetterSkyblockDrops >> Plugin has been disabled!");
         this.getServer().getPluginManager().disablePlugin(this);
     }
 
@@ -57,6 +63,15 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         int quartz_perc = this.getConfig().getInt("quartz_perc", 20);
         int quartz_amount = this.getConfig().getInt("quartz_amount", 1);
         String quartz_disable = this.getConfig().getString("quartz_disable", "false");
+        int soul_sand_perc = this.getConfig().getInt("soul_sand_perc", 20);
+        int soul_sand_amount = this.getConfig().getInt("soul_sand_amount", 1);
+        String soul_sand_disable = this.getConfig().getString("soul_sand_disable", "false");
+        int ancient_debris_perc = this.getConfig().getInt("ancient_debris_perc", 100);
+        int ancient_debris_amount = this.getConfig().getInt("ancient_debris_amount", 4);
+        String ancient_debris_disable = this.getConfig().getString("ancient_debris_disable", "false");
+        int magma_cream_perc = this.getConfig().getInt("magma_cream_perc", 15);
+        int magma_cream_amount = this.getConfig().getInt("magma_cream_amount", 1);
+        String magma_cream_disable = this.getConfig().getString("magma_cream_disable", "false");
 
         LivingEntity entity = e.getEntity();
         Random random = new Random();
@@ -79,7 +94,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
             }
         }
 
-        if (entity.getType() == EntityType.SKELETON && sand_disable.equals("false")) { // SAND
+        if (entity.getType() == EntityType.HUSK && sand_disable.equals("false")) { // SAND
             if (sand_perc > 100 || sand_perc < 1) {
                 sand_perc = 20; // USE DEFAULT PERCENTAGE
             }
@@ -100,6 +115,42 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
             }
             if (number <= quartz_perc) {
                 e.getDrops().add(new ItemStack(Material.QUARTZ, quartz_amount)); // QUARTZ DROP
+            }
+        }
+
+        if (entity.getType() == EntityType.WITHER_SKELETON && soul_sand_disable.equals("false")) { // SOUL SAND
+            if (soul_sand_perc > 100 || soul_sand_perc < 1) {
+                soul_sand_perc = 20; // USE DEFAULT PERCENTAGE
+            }
+            if (soul_sand_amount > 10 || soul_sand_amount < 1) {
+                soul_sand_amount = 1; // USE DEFAULT AMOUNT
+            }
+            if (number <= soul_sand_perc) {
+                e.getDrops().add(new ItemStack(Material.SOUL_SAND, soul_sand_amount)); // SOUL SAND DROP
+            }
+        }
+
+        if (entity.getType() == EntityType.WITHER && ancient_debris_disable.equals("false")) { // ANCIENT DEBRIS
+            if (ancient_debris_perc > 100 || ancient_debris_perc < 1) {
+                ancient_debris_perc = 100; // USE DEFAULT PERCENTAGE
+            }
+            if (ancient_debris_amount > 10 || ancient_debris_amount < 1) {
+                ancient_debris_amount = 4; // USE DEFAULT AMOUNT
+            }
+            if (number <= ancient_debris_perc) {
+                e.getDrops().add(new ItemStack(Material.ANCIENT_DEBRIS, ancient_debris_amount)); // ANCIENT DEBRIS DROP
+            }
+        }
+
+        if (entity.getType() == EntityType.ZOMBIFIED_PIGLIN && magma_cream_disable.equals("false")) { // MAGMA CREAM
+            if (magma_cream_perc > 100 || magma_cream_perc < 1) {
+                magma_cream_perc = 15; // USE DEFAULT PERCENTAGE
+            }
+            if (magma_cream_amount > 10 || magma_cream_amount < 1) {
+                magma_cream_amount = 1; // USE DEFAULT AMOUNT
+            }
+            if (number <= magma_cream_perc) {
+                e.getDrops().add(new ItemStack(Material.MAGMA_CREAM, magma_cream_amount)); // MAGMA CREAM DROP
             }
         }
     }
