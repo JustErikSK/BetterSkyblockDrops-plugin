@@ -50,6 +50,14 @@ magma_cream_perc : 15
 magma_cream_amount : 1
 magma_cream_drop: true
 
+# Glowstone drops from Skeletons
+# Glowstone drop percentage (Default = 10, Min: 1, Max: 100)
+# Glowstone drop amount (Default = 1, Min: 1, Max: 10)
+# Glowstone drop disable / enable (true = drop enabled , false = drop disabled)
+glowstone_perc: 10
+glowstone_amount: 1
+glowstone_drop: true
+
 # Rules for events
 halloween_event: true
 

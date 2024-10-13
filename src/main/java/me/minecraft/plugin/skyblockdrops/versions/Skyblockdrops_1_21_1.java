@@ -66,6 +66,9 @@ public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
         int magma_cream_perc = this.getConfig().getInt("magma_cream_perc", 15);
         int magma_cream_amount = this.getConfig().getInt("magma_cream_amount", 1);
         String magma_cream_drop = this.getConfig().getString("magma_cream_drop", "true");
+        int glowstone_perc = this.getConfig().getInt("glowstone_perc", 10);
+        int glowstone_amount = this.getConfig().getInt("glowstone_amount", 1);
+        String glowstone_drop = this.getConfig().getString("glowstone_drop", "true");
 
         LivingEntity entity = e.getEntity();
         Random random = new Random();
@@ -147,6 +150,18 @@ public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
                 e.getDrops().add(new ItemStack(Material.MAGMA_CREAM, magma_cream_amount)); // MAGMA CREAM DROP
             }
         }
+
+        if (entity.getType() == EntityType.SKELETON && glowstone_drop.equals("true")) { // GLOWSTONE
+            if (glowstone_perc > 100 || glowstone_perc < 1) {
+                glowstone_perc = 10; // USE DEFAULT PERCENTAGE
+            }
+            if (glowstone_amount > 10 || glowstone_amount < 1) {
+                glowstone_amount = 1; // USE DEFAULT AMOUNT
+            }
+            if (number <= glowstone_perc) {
+                e.getDrops().add(new ItemStack(Material.GLOWSTONE, glowstone_amount)); // GLOWSTONE DROP
+            }
+        }
     }
 
     @EventHandler
@@ -154,5 +169,15 @@ public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
 
         // GET THE DEFAULT VALUE FOR EVENT RULES
         String halloween_event = this.getConfig().getString("halloween_event", "true");
+
+        LivingEntity entity = event.getEntity();
+        ItemStack pumpkin = new ItemStack(Material.PUMPKIN);
+        ItemStack fancy_pumpkin = new ItemStack(Material.JACK_O_LANTERN);
+
+        if (halloween_event.equals("true")) {
+            if (entity.getType() == EntityType.ZOMBIE || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.BLAZE || entity.getType() == EntityType.WITHER_SKELETON || entity.getType() == EntityType.WITHER || entity.getType() == EntityType.ZOMBIFIED_PIGLIN || entity.getType() == EntityType.SKELETON) {
+
+            }
+        }
     }
 }
