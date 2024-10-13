@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
@@ -171,12 +172,20 @@ public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
         String halloween_event = this.getConfig().getString("halloween_event", "true");
 
         LivingEntity entity = event.getEntity();
-        ItemStack pumpkin = new ItemStack(Material.PUMPKIN);
+        ItemStack pumpkin = new ItemStack(Material.CARVED_PUMPKIN);
         ItemStack fancy_pumpkin = new ItemStack(Material.JACK_O_LANTERN);
+
+        Random random = new Random();
+        int number = random.nextInt(100);
 
         if (halloween_event.equals("true")) {
             if (entity.getType() == EntityType.ZOMBIE || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.BLAZE || entity.getType() == EntityType.WITHER_SKELETON || entity.getType() == EntityType.WITHER || entity.getType() == EntityType.ZOMBIFIED_PIGLIN || entity.getType() == EntityType.SKELETON) {
-
+                if (number > 50) {
+                    Objects.requireNonNull(entity.getEquipment()).setHelmet(pumpkin);
+                }
+                if (number < 10) {
+                    Objects.requireNonNull(entity.getEquipment()).setHelmet(fancy_pumpkin);
+                }
             }
         }
     }
