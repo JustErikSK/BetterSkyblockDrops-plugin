@@ -1,4 +1,4 @@
-package me.minecraft.plugin.skyblockdrops;
+package me.minecraft.plugin.skyblockdrops.versions;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Random;
 
-public final class Skyblockdrops extends JavaPlugin implements Listener {
+public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
@@ -42,12 +42,6 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         config.addDefault("magma_cream_perc", 15);
         config.addDefault("magma_cream_amount", 1);
         config.addDefault("magma_cream_disable", false);
-    }
-
-    @Override
-    public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "BetterSkyblockDrops >> Plugin has been disabled!");
-        this.getServer().getPluginManager().disablePlugin(this);
     }
 
     @EventHandler
