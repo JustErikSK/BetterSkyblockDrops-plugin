@@ -5,49 +5,52 @@
 # Gravel drops from Zombies
 # Gravel drop percentage (Default = 20, Min: 1, Max: 100)
 # Gravel drop amount (Default = 1, Min: 1, Max: 10)
-# Gravel drop disable/enable (false = drop enabled , true = drop disabled)
+# Gravel drop disable/enable (true = drop enabled , false = drop disabled)
 gravel_perc : 20
 gravel_amount: 1
-gravel_disable: false
+gravel_drop: true
 
 # Sand drops from Husks
 # Sand drop percentage (Default = 20, Min: 1, Max: 100)
 # Sand drop amount (Default = 1, Min: 1, Max: 10)
-# Sand drop disable/enable (false = drop enabled , true = drop disabled)
+# Sand drop disable/enable (true = drop enabled , false = drop disabled)
 sand_perc : 20
 sand_amount : 1
-sand_disable: false
+sand_drop: true
 
 # Quartz drops from Blazes
 # Quartz drop percentage (Default = 20, Min: 1, Max: 100)
 # Quartz drop amount (Default = 1, Min: 1, Max: 10)
-# Quartz drop disable/enable (false = drop enabled , true = drop disabled)
+# Quartz drop disable/enable (true = drop enabled , false = drop disabled)
 quartz_perc : 20
 quartz_amount : 1
-quartz_disable: false
+quartz_drop: true
 
 # Soul Sand drops from Wither Skeletons
 # Soul Sand drop percentage (Default = 20, Min: 1, Max: 100)
 # Soul Sand drop amount (Default = 1, Min: 1, Max: 10)
-# Soul Sand drop disable/enable (false = drop enabled , true = drop disabled)
+# Soul Sand drop disable/enable (true = drop enabled , false = drop disabled)
 soul_sand_perc : 20
 soul_sand_amount : 1
-soul_sand_disable: false
+soul_sand_drop: true
 
 # Ancient Debris drops from Withers
 # Ancient Debris drop percentage (Default = 100, Min: 1, Max: 100)
 # Ancient Debris drop amount (Default = 2, Min: 1, Max: 10)
-# Ancient Debris drop disable/enable (false = drop enabled , true = drop disabled)
+# Ancient Debris drop disable/enable (true = drop enabled , false = drop disabled)
 ancient_debris_perc : 100
 ancient_debris_amount : 4
-ancient_debris_disable: false
+ancient_debris_drop: true
 
 # Magma Cream drops from Zombified Piglins
 # Magma Cream drop percentage (Default = 15, Min: 1, Max: 100)
 # Magma Cream drop amount (Default = 1, Min: 1, Max: 10)
-# Magma Cream drop disable/enable (false = drop enabled , true = drop disabled)
+# Magma Cream drop disable/enable (true = drop enabled , false = drop disabled)
 magma_cream_perc : 15
 magma_cream_amount : 1
-magma_cream_disable: false
+magma_cream_drop: true
+
+# Rules for events
+halloween_event: true
 
 # End of config file
