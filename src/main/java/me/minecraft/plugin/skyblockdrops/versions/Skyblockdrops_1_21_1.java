@@ -178,6 +178,9 @@ public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
         Random random = new Random();
         int number = random.nextInt(100);
 
+        Random random1 = new Random();
+        int number1 = random1.nextInt(1000);
+
         if (halloween_event.equals("true")) {
             if (entity.getType() == EntityType.ZOMBIE || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.BLAZE || entity.getType() == EntityType.WITHER_SKELETON || entity.getType() == EntityType.WITHER || entity.getType() == EntityType.ZOMBIFIED_PIGLIN || entity.getType() == EntityType.SKELETON) {
                 if (number > 50) {
@@ -185,6 +188,9 @@ public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
                 }
                 if (number < 10) {
                     Objects.requireNonNull(entity.getEquipment()).setHelmet(fancy_pumpkin);
+                }
+                if (number1 == 1) {
+                    event.getDrops().add(new ItemStack(Material.DIAMOND));
                 }
             }
         }
