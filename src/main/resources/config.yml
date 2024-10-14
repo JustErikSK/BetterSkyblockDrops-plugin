@@ -6,7 +6,7 @@
 # Gravel drop percentage (Default = 20, Min: 1, Max: 100)
 # Gravel drop amount (Default = 1, Min: 1, Max: 10)
 # Gravel drop disable/enable (true = drop enabled , false = drop disabled)
-gravel_perc : 20
+gravel_perc : 10
 gravel_amount: 1
 gravel_drop: true
 
@@ -14,7 +14,7 @@ gravel_drop: true
 # Sand drop percentage (Default = 20, Min: 1, Max: 100)
 # Sand drop amount (Default = 1, Min: 1, Max: 10)
 # Sand drop disable/enable (true = drop enabled , false = drop disabled)
-sand_perc : 20
+sand_perc : 10
 sand_amount : 1
 sand_drop: true
 
@@ -22,7 +22,7 @@ sand_drop: true
 # Quartz drop percentage (Default = 20, Min: 1, Max: 100)
 # Quartz drop amount (Default = 1, Min: 1, Max: 10)
 # Quartz drop disable/enable (true = drop enabled , false = drop disabled)
-quartz_perc : 20
+quartz_perc : 10
 quartz_amount : 1
 quartz_drop: true
 
@@ -30,7 +30,7 @@ quartz_drop: true
 # Soul Sand drop percentage (Default = 20, Min: 1, Max: 100)
 # Soul Sand drop amount (Default = 1, Min: 1, Max: 10)
 # Soul Sand drop disable/enable (true = drop enabled , false = drop disabled)
-soul_sand_perc : 20
+soul_sand_perc : 10
 soul_sand_amount : 1
 soul_sand_drop: true
 
@@ -46,7 +46,7 @@ ancient_debris_drop: true
 # Magma Cream drop percentage (Default = 15, Min: 1, Max: 100)
 # Magma Cream drop amount (Default = 1, Min: 1, Max: 10)
 # Magma Cream drop disable/enable (true = drop enabled , false = drop disabled)
-magma_cream_perc : 15
+magma_cream_perc : 10
 magma_cream_amount : 1
 magma_cream_drop: true
 
