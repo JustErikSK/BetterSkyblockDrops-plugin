@@ -1,4 +1,4 @@
-# Configuration file for OriginalSkyblockDrops plugin
+# Configuration file for Better Skyblock Drops plugin
 # You can set your own drop percentages and drop amounts here or even disable drops completely
 # If you set a number that's more/less than the set maximum/minimum, plugin will automatically use default value
 
@@ -59,6 +59,7 @@ glowstone_amount: 1
 glowstone_drop: true
 
 # Rules for events
+# Halloween Event - true/false
 halloween_event: true
 
 # End of config file
