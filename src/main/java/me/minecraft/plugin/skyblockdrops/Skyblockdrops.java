@@ -1,4 +1,4 @@
-package me.minecraft.plugin.skyblockdrops.versions;
+package me.minecraft.plugin.skyblockdrops;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,13 +9,14 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 import java.util.Random;
 
-public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
+public final class Skyblockdrops extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
@@ -164,36 +165,50 @@ public class Skyblockdrops_1_21_1 extends JavaPlugin implements Listener {
                 glowstone_amount = 1; // USE DEFAULT AMOUNT
             }
             if (number <= glowstone_perc) {
-                e.getDrops().add(new ItemStack(Material.GLOWSTONE, glowstone_amount)); // GLOWSTONE DROP
+                e.getDrops().add(new ItemStack(Material.GLOWSTONE_DUST, glowstone_amount)); // GLOWSTONE DROP
             }
         }
     }
 
     @EventHandler
-    public void halloweenEvent(EntityDeathEvent event) {
+    public void halloweenEventSpawn(EntitySpawnEvent event) {
 
         // GET THE DEFAULT VALUE FOR EVENT RULES
         String halloween_event = this.getConfig().getString("halloween_event", "true");
 
-        LivingEntity entity = event.getEntity();
+        LivingEntity entity = (LivingEntity) event.getEntity();
         ItemStack pumpkin = new ItemStack(Material.CARVED_PUMPKIN);
         ItemStack fancy_pumpkin = new ItemStack(Material.JACK_O_LANTERN);
 
         Random random = new Random();
         int number = random.nextInt(100);
 
-        Random random1 = new Random();
-        int number1 = random1.nextInt(1000);
-
         if (halloween_event.equals("true")) {
-            if (entity.getType() == EntityType.ZOMBIE || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.BLAZE || entity.getType() == EntityType.WITHER_SKELETON || entity.getType() == EntityType.WITHER || entity.getType() == EntityType.ZOMBIFIED_PIGLIN || entity.getType() == EntityType.SKELETON) {
-                if (number > 50) {
+            if (entity.getType() == EntityType.ZOMBIE || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.WITHER_SKELETON || entity.getType() == EntityType.ZOMBIFIED_PIGLIN || entity.getType() == EntityType.SKELETON) {
+                if (number > 60) {
                     Objects.requireNonNull(entity.getEquipment()).setHelmet(pumpkin);
                 }
                 if (number < 10) {
                     Objects.requireNonNull(entity.getEquipment()).setHelmet(fancy_pumpkin);
                 }
-                if (number1 == 1) {
+            }
+        }
+    }
+
+    @EventHandler
+    public void halloweenEventDeath(EntityDeathEvent event) {
+
+        // GET THE DEFAULT VALUE FOR EVENT RULES
+        String halloween_event = this.getConfig().getString("halloween_event", "true");
+
+        Random random = new Random();
+        int number = random.nextInt(1000);
+
+        LivingEntity entity = event.getEntity();
+
+        if (halloween_event.equals("true")) {
+            if (entity.getType() == EntityType.ZOMBIE || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.BLAZE || entity.getType() == EntityType.WITHER_SKELETON || entity.getType() == EntityType.WITHER || entity.getType() == EntityType.ZOMBIFIED_PIGLIN || entity.getType() == EntityType.SKELETON) {
+                if (number == 1) {
                     event.getDrops().add(new ItemStack(Material.DIAMOND));
                 }
             }

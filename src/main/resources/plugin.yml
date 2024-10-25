@@ -1,5 +1,6 @@
 name: Skyblockdrops
 version: 2
-main: me.minecraft.plugin.skyblockdrops.versions.Skyblockdrops_1_21_1
+main: me.minecraft.plugin.skyblockdrops.Skyblockdrops
+api-version: 1.21
 authors: [ JustErikSK ]
 description: This plugin brings new loot for some mobs. Plugin is highly configurable using config.yml! Now with a Halloween event!
