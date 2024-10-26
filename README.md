@@ -17,7 +17,7 @@ This plugin brings new loot for zombies, blazes, husks, skeletons, wither skelet
 4. After first server start with our plugin, new folder with a config file will be created in your server's plugins folder to change the drop amounts, percentages and/or disable / enable drops.
 
 ## Our plugin is highly customizable, you can change your drop amounts and percentages or even fully disable / enable specific drops with config.yml that is automatically created in your plugins folder!
-### All drop amounts and percentages have maximum and minimum set number, if you use for example 120% for gravel, the default value will be used, which is 20%.
+### All drop amounts and percentages have maximum and minimum set number, if you use for example 120% for gravel, the default value will be used, which is 10%.
 
 **List of all drops (default values):** _Values are accurate from version v2!_
 - **Gravel - from Zombies** _(10% for 1)_
