@@ -22,13 +22,13 @@ This plugin brings new loot for zombies, blazes, husks, skeletons, wither skelet
 **List of all drops (default values):** _Values are accurate from version v2!_
 - **Gravel - from Zombies** _(10% for 1)_
 - **Quartz - from Blazes** _(10% for 1)_
-- **Glowstone Dust - from Skeletons** _(10% for 1)_
+- **Glowstone Dust - from Skeletons** _(only in v2 for now - 10% for 1)_
 - **Sand - from Husks** _(10% for 1)_ - Sand drops from Skeletons in 1.10 and below
 - **Soul Sand - from Wither Skeletons** _(10% for 1)_ - 1.11 and above
 - **Ancient Debris - from Withers** _(100% for 4)_ - 1.16 and above
 - **Magma Cream - from Zombified Piglins** _(10% for 1)_ - 1.13 and above
 
-**Halloween Event:**
+**Halloween Event:** _Only in v2 for now: 1.21 - 1.21.3_
 - **Diamond - drops from any of the mobs mentioned above** _(0.1% for 1)_
 - **Carved Pumpkin - as a head decoration for these mobs** _(40%)_
 - **Jack o'Lantern - as a head decoration for these mobs** _(10%)_
