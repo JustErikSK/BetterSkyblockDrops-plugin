@@ -1,14 +1,15 @@
 # BetterSkyblockDrops Plugin
 This plugin brings new loot for zombies, blazes, husks, skeletons, wither skeletons, withers and zombified piglins.
+
 Now with seasonal events too! *(only Halloween event is available at the moment, more to come in the future)*
 
 **INSTALLATION:**
 
 1. Use one of these options to download BetterSkyblockDrops plugin:
 
-- [GitHub releases] https://github.com/JustErikSK/OriginalSkyblockDrops/releases.
-- [Spigot] https://www.spigotmc.org/resources/original-skyblock-drops.100746/.
-- [CurseForge] https://www.curseforge.com/minecraft/bukkit-plugins/better-skyblock-drops.
+- [GitHub releases] https://github.com/JustErikSK/OriginalSkyblockDrops/releases
+- [Spigot] https://www.spigotmc.org/resources/original-skyblock-drops.100746/
+- [CurseForge] https://www.curseforge.com/minecraft/bukkit-plugins/better-skyblock-drops
 - [Modrinth] https://modrinth.com/plugin/better-skyblock-drops
   
 2. Drop the file in your server's plugins folder.
