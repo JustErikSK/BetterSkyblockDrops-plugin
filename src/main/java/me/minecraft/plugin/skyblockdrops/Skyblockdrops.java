@@ -76,140 +76,141 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         int glowstone_amount = this.getConfig().getInt("glowstone_amount", 1);
         String glowstone_drop = this.getConfig().getString("glowstone_drop", "true");
 
-        LivingEntity entity = e.getEntity();
-        Random random = new Random();
+        LivingEntity ent = e.getEntity();
+        Random ran = new Random();
 
-        int number = random.nextInt(100);
+        int num = ran.nextInt(100);
 
         // DROPS WILL WORK ONLY IF THE DROP OPTION IS SET TO TRUE IN CONFIG.YML
         // IF PERCENTAGE IS MORE THAN 100 OR LESS THAN 1, DEFAULT VALUE WILL BE ACTIVE
         // IF AMOUNT IS MORE THAN 10 OR LESS THAN 1, ONLY VANILLA DROPS WILL BE APPLIED
 
-        if (entity.getType() == EntityType.ZOMBIE && gravel_drop.equals("true")) { // GRAVEL
+        if (ent.getType() == EntityType.ZOMBIE && gravel_drop.equals("true")) { // GRAVEL
             if (gravel_perc > 100 || gravel_perc < 1) {
                 gravel_perc = 10; // USE DEFAULT PERCENTAGE
             }
             if (gravel_amount > 10 || gravel_amount < 1) {
                 gravel_amount = 1; // USE DEFAULT AMOUNT
             }
-            if (number <= gravel_perc) {
+            if (num <= gravel_perc) {
                 e.getDrops().add(new ItemStack(Material.GRAVEL, gravel_amount)); // GRAVEL DROP
             }
         }
 
-        if (entity.getType() == EntityType.HUSK && sand_drop.equals("true")) { // SAND
+        if (ent.getType() == EntityType.HUSK && sand_drop.equals("true")) { // SAND
             if (sand_perc > 100 || sand_perc < 1) {
                 sand_perc = 10; // USE DEFAULT PERCENTAGE
             }
             if (sand_amount > 10 || sand_amount < 1) {
                 sand_amount = 1; // USE DEFAULT AMOUNT
             }
-            if (number <= sand_perc) {
+            if (num <= sand_perc) {
                 e.getDrops().add(new ItemStack(Material.SAND, sand_amount)); // SAND DROP
             }
         }
 
-        if (entity.getType() == EntityType.BLAZE && quartz_drop.equals("true")) { // QUARTZ
+        if (ent.getType() == EntityType.BLAZE && quartz_drop.equals("true")) { // QUARTZ
             if (quartz_perc > 100 || quartz_perc < 1) {
                 quartz_perc = 10; // USE DEFAULT PERCENTAGE
             }
             if (quartz_amount > 10 || quartz_amount < 1) {
                 quartz_amount = 1; // USE DEFAULT AMOUNT
             }
-            if (number <= quartz_perc) {
+            if (num <= quartz_perc) {
                 e.getDrops().add(new ItemStack(Material.QUARTZ, quartz_amount)); // QUARTZ DROP
             }
         }
 
-        if (entity.getType() == EntityType.WITHER_SKELETON && soul_sand_drop.equals("true")) { // SOUL SAND
+        if (ent.getType() == EntityType.WITHER_SKELETON && soul_sand_drop.equals("true")) { // SOUL SAND
             if (soul_sand_perc > 100 || soul_sand_perc < 1) {
                 soul_sand_perc = 10; // USE DEFAULT PERCENTAGE
             }
             if (soul_sand_amount > 10 || soul_sand_amount < 1) {
                 soul_sand_amount = 1; // USE DEFAULT AMOUNT
             }
-            if (number <= soul_sand_perc) {
+            if (num <= soul_sand_perc) {
                 e.getDrops().add(new ItemStack(Material.SOUL_SAND, soul_sand_amount)); // SOUL SAND DROP
             }
         }
 
-        if (entity.getType() == EntityType.WITHER && ancient_debris_drop.equals("true")) { // ANCIENT DEBRIS
+        if (ent.getType() == EntityType.WITHER && ancient_debris_drop.equals("true")) { // ANCIENT DEBRIS
             if (ancient_debris_perc > 100 || ancient_debris_perc < 1) {
                 ancient_debris_perc = 100; // USE DEFAULT PERCENTAGE
             }
             if (ancient_debris_amount > 10 || ancient_debris_amount < 1) {
                 ancient_debris_amount = 4; // USE DEFAULT AMOUNT
             }
-            if (number <= ancient_debris_perc) {
+            if (num <= ancient_debris_perc) {
                 e.getDrops().add(new ItemStack(Material.ANCIENT_DEBRIS, ancient_debris_amount)); // ANCIENT DEBRIS DROP
             }
         }
 
-        if (entity.getType() == EntityType.ZOMBIFIED_PIGLIN && magma_cream_drop.equals("true")) { // MAGMA CREAM
+        if (ent.getType() == EntityType.ZOMBIFIED_PIGLIN && magma_cream_drop.equals("true")) { // MAGMA CREAM
             if (magma_cream_perc > 100 || magma_cream_perc < 1) {
                 magma_cream_perc = 10; // USE DEFAULT PERCENTAGE
             }
             if (magma_cream_amount > 10 || magma_cream_amount < 1) {
                 magma_cream_amount = 1; // USE DEFAULT AMOUNT
             }
-            if (number <= magma_cream_perc) {
+            if (num <= magma_cream_perc) {
                 e.getDrops().add(new ItemStack(Material.MAGMA_CREAM, magma_cream_amount)); // MAGMA CREAM DROP
             }
         }
 
-        if (entity.getType() == EntityType.SKELETON && glowstone_drop.equals("true")) { // GLOWSTONE
+        if (ent.getType() == EntityType.SKELETON && glowstone_drop.equals("true")) { // GLOWSTONE
             if (glowstone_perc > 100 || glowstone_perc < 1) {
                 glowstone_perc = 10; // USE DEFAULT PERCENTAGE
             }
             if (glowstone_amount > 10 || glowstone_amount < 1) {
                 glowstone_amount = 1; // USE DEFAULT AMOUNT
             }
-            if (number <= glowstone_perc) {
+            if (num <= glowstone_perc) {
                 e.getDrops().add(new ItemStack(Material.GLOWSTONE_DUST, glowstone_amount)); // GLOWSTONE DROP
             }
         }
     }
 
     @EventHandler
-    public void halloweenEventSpawn(EntitySpawnEvent event) {
+    public void halloweenEventSpawn(EntitySpawnEvent e) {
 
         // GET THE DEFAULT VALUE FOR EVENT RULES
         String halloween_event = this.getConfig().getString("halloween_event", "true");
 
-        LivingEntity entity = (LivingEntity) event.getEntity();
         ItemStack pumpkin = new ItemStack(Material.CARVED_PUMPKIN);
         ItemStack fancy_pumpkin = new ItemStack(Material.JACK_O_LANTERN);
 
         Random random = new Random();
         int number = random.nextInt(100);
 
-        if (halloween_event.equals("true")) {
-            if (entity.getType() == EntityType.ZOMBIE || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.WITHER_SKELETON || entity.getType() == EntityType.ZOMBIFIED_PIGLIN || entity.getType() == EntityType.SKELETON) {
-                if (number > 60) {
-                    Objects.requireNonNull(entity.getEquipment()).setHelmet(pumpkin);
-                }
-                if (number < 10) {
-                    Objects.requireNonNull(entity.getEquipment()).setHelmet(fancy_pumpkin);
+        if (e.getEntity() instanceof LivingEntity) {
+            LivingEntity ent = (LivingEntity) e.getEntity();
+            if (halloween_event.equals("true")) {
+                if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
+                    if (number > 60) {
+                        Objects.requireNonNull(ent.getEquipment()).setHelmet(pumpkin);
+                    }
+                    if (number < 10) {
+                        Objects.requireNonNull(ent.getEquipment()).setHelmet(fancy_pumpkin);
+                    }
                 }
             }
         }
     }
 
     @EventHandler
-    public void halloweenEventDeath(EntityDeathEvent event) {
+    public void halloweenEventDeath(EntityDeathEvent e) {
 
         // GET THE DEFAULT VALUE FOR EVENT RULES
         String halloween_event = this.getConfig().getString("halloween_event", "true");
 
         Random random = new Random();
         int number = random.nextInt(1000);
-
-        LivingEntity entity = event.getEntity();
+        LivingEntity ent = e.getEntity();
 
         if (halloween_event.equals("true")) {
-            if (entity.getType() == EntityType.ZOMBIE || entity.getType() == EntityType.HUSK || entity.getType() == EntityType.BLAZE || entity.getType() == EntityType.WITHER_SKELETON || entity.getType() == EntityType.WITHER || entity.getType() == EntityType.ZOMBIFIED_PIGLIN || entity.getType() == EntityType.SKELETON) {
+            if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.BLAZE || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.WITHER || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
                 if (number == 1) {
-                    event.getDrops().add(new ItemStack(Material.DIAMOND));
+                    e.getDrops().add(new ItemStack(Material.DIAMOND));
                 }
             }
         }
