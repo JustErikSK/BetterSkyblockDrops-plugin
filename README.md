@@ -2,6 +2,7 @@
 This plugin brings new loot for zombies, blazes, husks, skeletons, wither skeletons, withers and zombified piglins.
 
 Now with seasonal events too! *(only Halloween event is available at the moment, more to come in the future)*
+
 **INSTALLATION:**
 1. Use one of these options to download BetterSkyblockDrops plugin:
 - [GitHub releases] https://github.com/JustErikSK/BetterSkyblockDrops-plugin/releases
