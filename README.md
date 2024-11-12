@@ -7,7 +7,7 @@ Now with seasonal events too! *(only Halloween event is available at the moment,
 
 1. Use one of these options to download BetterSkyblockDrops plugin:
 
-- [GitHub releases] https://github.com/JustErikSK/OriginalSkyblockDrops/releases
+- [GitHub releases] https://github.com/JustErikSK/BetterSkyblockDrops-plugin/releases
 - [Spigot] https://www.spigotmc.org/resources/original-skyblock-drops.100746/
 - [CurseForge] https://www.curseforge.com/minecraft/bukkit-plugins/better-skyblock-drops
 - [Modrinth] https://modrinth.com/plugin/better-skyblock-drops
