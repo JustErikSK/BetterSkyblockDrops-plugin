@@ -1,5 +1,5 @@
 name: Skyblockdrops
-version: 2
+version: 2.1
 main: me.minecraft.plugin.skyblockdrops.Skyblockdrops
 api-version: 1.21
 authors: [ JustErikSK ]
