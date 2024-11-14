@@ -60,7 +60,7 @@ glowstone_drop: true
 
 # Rules for events
 # Halloween Event - true/false
-halloween_event: true
+halloween_event: false
 
 # Last updated for BetterSkyblockDrops v2
 # End of config file
