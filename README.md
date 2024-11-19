@@ -13,7 +13,8 @@ Now with seasonal events too! *(only Halloween event is available at the moment,
 3. After first server start with our plugin, new folder with a config file will be created in your server's plugins folder. You can change the drop percentages and amounts, enable/disable events or enable/disable some drops.
 
 
-### List of all drops: _Values are accurate from version v2!_
+_Values are accurate from version v2!_
+### List of all drops:
 - **Gravel - from Zombies** _(10% for 1)_
 - **Quartz - from Blazes** _(10% for 1)_
 - **Glowstone Dust - from Skeletons** _(only in v2 for now - 10% for 1)_
@@ -22,7 +23,7 @@ Now with seasonal events too! *(only Halloween event is available at the moment,
 - **Ancient Debris - from Withers** _(100% for 4)_ - 1.16 and above
 - **Magma Cream - from Zombified Piglins** _(10% for 1)_ - 1.13 and above
 
-### Halloween Event: _Only in v2 for now: 1.21 - 1.21.3_
+### Halloween Event: (DISABLED BY DEFAULT, AVAILABLE THROUGH THE CONFIG FILE)
 - **Diamond - drops from any of the mobs mentioned above** _(0.1% for 1)_
 - **Carved Pumpkin - as a head decoration for these mobs** _(40%)_
 - **Jack o'Lantern - as a head decoration for these mobs** _(10%)_
