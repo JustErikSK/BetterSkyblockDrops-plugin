@@ -59,8 +59,9 @@ glowstone_amount: 1
 glowstone_drop: true
 
 # Rules for events
+# Events are disabled by default (unless it's event season like Halloween in October)
 # Halloween Event - true/false
-halloween_event: true
+halloween_event: false
 
 # Last updated for BetterSkyblockDrops v2
 # End of config file
