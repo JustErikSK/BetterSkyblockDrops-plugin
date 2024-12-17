@@ -1,12 +1,12 @@
 # Configuration file for BetterSkyblockDrops plugin
 # You can set your own drop percentages and drop amounts here or even disable drops completely
-# If you set a number that's more/less than the set maximum/minimum, plugin will automatically use default value
+# If you set a number that's more/less than the set maximum/minimum, plugin will automatically use the default value
 
 # Gravel drops from Zombies
 # Gravel drop percentage (Default = 20, Min: 1, Max: 100)
 # Gravel drop amount (Default = 1, Min: 1, Max: 10)
 # Gravel drop disable/enable (true = drop enabled , false = drop disabled)
-gravel_perc : 10
+gravel_perc: 10
 gravel_amount: 1
 gravel_drop: true
 
@@ -14,40 +14,40 @@ gravel_drop: true
 # Sand drop percentage (Default = 20, Min: 1, Max: 100)
 # Sand drop amount (Default = 1, Min: 1, Max: 10)
 # Sand drop disable/enable (true = drop enabled , false = drop disabled)
-sand_perc : 10
-sand_amount : 1
+sand_perc: 10
+sand_amount: 1
 sand_drop: true
 
 # Quartz drops from Blazes
 # Quartz drop percentage (Default = 20, Min: 1, Max: 100)
 # Quartz drop amount (Default = 1, Min: 1, Max: 10)
 # Quartz drop disable/enable (true = drop enabled , false = drop disabled)
-quartz_perc : 10
-quartz_amount : 1
+quartz_perc: 10
+quartz_amount: 1
 quartz_drop: true
 
 # Soul Sand drops from Wither Skeletons
 # Soul Sand drop percentage (Default = 20, Min: 1, Max: 100)
 # Soul Sand drop amount (Default = 1, Min: 1, Max: 10)
 # Soul Sand drop disable/enable (true = drop enabled , false = drop disabled)
-soul_sand_perc : 10
-soul_sand_amount : 1
+soul_sand_perc: 10
+soul_sand_amount: 1
 soul_sand_drop: true
 
 # Ancient Debris drops from Withers
 # Ancient Debris drop percentage (Default = 100, Min: 1, Max: 100)
 # Ancient Debris drop amount (Default = 2, Min: 1, Max: 10)
 # Ancient Debris drop disable/enable (true = drop enabled , false = drop disabled)
-ancient_debris_perc : 100
-ancient_debris_amount : 4
+ancient_debris_perc: 100
+ancient_debris_amount: 4
 ancient_debris_drop: true
 
 # Magma Cream drops from Zombified Piglins
 # Magma Cream drop percentage (Default = 15, Min: 1, Max: 100)
 # Magma Cream drop amount (Default = 1, Min: 1, Max: 10)
 # Magma Cream drop disable/enable (true = drop enabled , false = drop disabled)
-magma_cream_perc : 10
-magma_cream_amount : 1
+magma_cream_perc: 10
+magma_cream_amount: 1
 magma_cream_drop: true
 
 # Glowstone drops from Skeletons
@@ -60,8 +60,11 @@ glowstone_drop: true
 
 # Rules for events
 # Events are disabled by default (unless it's event season like Halloween in October)
+# It's highly recommended to only use 1 event at a time, they will most probably work together but some features might not work as intended!
 # Halloween Event - true/false
 halloween_event: false
+christmas_event: true
 
-# Last updated for BetterSkyblockDrops v2
+# Last updated for BetterSkyblockDrops v2.3
+# Works for versions 1.21 - 1.21.4
 # End of config file
