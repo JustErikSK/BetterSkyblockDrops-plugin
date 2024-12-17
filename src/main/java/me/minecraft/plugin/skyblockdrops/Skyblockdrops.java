@@ -2,7 +2,6 @@ package me.minecraft.plugin.skyblockdrops;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
@@ -12,8 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -177,8 +174,8 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
     @EventHandler
     public void halloweenEventSpawn(EntitySpawnEvent e) {
 
-        // GET THE DEFAULT VALUE FOR HALLOWEEN EVENT RULE
-        String halloween_event = this.getConfig().getString("halloween_event", "false");
+        // GET THE DEFAULT VALUE FOR EVENT RULES
+        String halloween_event = this.getConfig().getString("halloween_event", "true");
 
         ItemStack pumpkin = new ItemStack(Material.CARVED_PUMPKIN);
         ItemStack fancy_pumpkin = new ItemStack(Material.JACK_O_LANTERN);
@@ -204,8 +201,8 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
     @EventHandler
     public void halloweenEventDeath(EntityDeathEvent e) {
 
-        // GET THE DEFAULT VALUE FOR HALLOWEEN EVENT RULE
-        String halloween_event = this.getConfig().getString("halloween_event", "false");
+        // GET THE DEFAULT VALUE FOR EVENT RULES
+        String halloween_event = this.getConfig().getString("halloween_event", "true");
 
         Random random = new Random();
         int number = random.nextInt(1000);
@@ -218,58 +215,5 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
                 }
             }
         }
-    }
-
-    @EventHandler
-    public void christmasEventSpawn(EntitySpawnEvent e) {
-
-        // GET THE DEFAULT VALUE FOR CHRISTMAS EVENT RULE
-        String christmas_event = this.getConfig().getString("christmas_event", "true");
-
-        Random random = new Random();
-        int number = random.nextInt(100);
-
-        if (e.getEntity() instanceof LivingEntity) {
-            LivingEntity ent = (LivingEntity) e.getEntity();
-            if (christmas_event.equals("true")) {
-                if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
-                    if (number > 85) { // SANTA'S HAT - RED LEATHER HELMET (15%)
-                        ItemStack redHelmet = new ItemStack(Material.LEATHER_HELMET, 1);
-                        LeatherArmorMeta redHelmetMeta = (LeatherArmorMeta) redHelmet.getItemMeta();
-                        redHelmetMeta.setColor(Color.fromRGB(255, 0, 0));
-                        redHelmetMeta.setDisplayName(ChatColor.GOLD + "Santa's Hat");
-                        redHelmet.setItemMeta(redHelmetMeta);
-                        Objects.requireNonNull(ent.getEquipment()).setHelmet(redHelmet);
-                    }
-                    if (number < 25) { // SANTA'S HELPER'S HAT - GREEN LEATHER HELMET (25%)
-                        ItemStack greenHelmet = new ItemStack(Material.LEATHER_HELMET, 1);
-                        LeatherArmorMeta greenHelmetMeta = (LeatherArmorMeta) greenHelmet.getItemMeta();
-                        greenHelmetMeta.setColor(Color.fromRGB(69, 230, 0));
-                        greenHelmetMeta.setDisplayName(ChatColor.DARK_PURPLE + "Santa's Helper's Hat");
-                        greenHelmet.setItemMeta(greenHelmetMeta);
-                        Objects.requireNonNull(ent.getEquipment()).setHelmet(greenHelmet);
-                    }
-                        if (number < 10) { // SWEET CANDIES - SWEET BERRIES (10%)
-                            ItemStack candies = new ItemStack(Material.SWEET_BERRIES, 1);
-                            ItemMeta itemStackMeta = candies.getItemMeta();
-                            itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Sweet Candies");
-                            candies.setItemMeta(itemStackMeta);
-                            Objects.requireNonNull(ent.getEquipment()).setItemInMainHand(candies);
-                        }
-                        if (number > 10 || number < 20) { // GINGERBREAD COOKIES - COOKIES (10%)
-                            ItemStack cookies = new ItemStack(Material.COOKIE, 1);
-                            ItemMeta itemStackMeta = cookies.getItemMeta();
-                            itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Gingerbread Cookies");
-                            cookies.setItemMeta(itemStackMeta);
-                            Objects.requireNonNull(ent.getEquipment()).setItemInMainHand(cookies);
-                        }
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    public void christmasEventDeath(EntityDeathEvent e) {
-
     }
 }
