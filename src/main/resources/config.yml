@@ -61,7 +61,8 @@ glowstone_drop: true
 # Rules for events
 # Events are disabled by default (unless it's event season like Halloween in October)
 # It's highly recommended to only use 1 event at a time, they will most probably work together but some features might not work as intended!
-# Halloween Event - true/false
+# Halloween Event - true/false (default False - except Halloween season)
+# Christmas Event - true/false (default False - except Christmas season)
 halloween_event: false
 christmas_event: true
 
