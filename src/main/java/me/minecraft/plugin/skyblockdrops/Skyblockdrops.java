@@ -19,6 +19,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class Skyblockdrops extends JavaPlugin implements Listener {
 
@@ -330,6 +331,36 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         rareRewards.add(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
     }
 
+    private ItemStack getRandomCommonRewards() {
+        if (commonRewards.isEmpty()) return null;
+
+        int randomIndexC = ThreadLocalRandom.current().nextInt(commonRewards.size());
+        return commonRewards.get(randomIndexC).clone();
+    }
+    private List<ItemStack> getCommonRewards(int amount) {
+        List<ItemStack> randomCommonRewards = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            randomCommonRewards.add(getRandomCommonRewards());
+        }
+        return randomCommonRewards;
+    }
+
+    private ItemStack getRandomRareReward() {
+        if (rareRewards.isEmpty()) return null;
+
+        int randomIndexR = ThreadLocalRandom.current().nextInt(rareRewards.size());
+        return rareRewards.get(randomIndexR).clone();
+    }
+    private List<ItemStack> getRareRewards(int amount) {
+        List<ItemStack> randomRareRewards = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            randomRareRewards.add(getRandomCommonRewards());
+        }
+        return randomRareRewards;
+    }
+
     @EventHandler
     public void onPlayerInteraction(PlayerInteractEvent e) {
         Player player = e.getPlayer();
@@ -340,7 +371,25 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
             e.setCancelled(true);
             player.sendMessage(ChatColor.GREEN + "You've opened a Present and found some goodies!");
             player.getInventory().removeItem(item);
-            player.getInventory().addItem(new ItemStack(Material.DIAMOND, 3));
+
+            Random random = new Random();
+            int number = random.nextInt(100);
+
+            if (number < 85) {
+                int rewardCount = ThreadLocalRandom.current().nextInt(1, 3);
+                List<ItemStack> randomCommonRewards = getCommonRewards(rewardCount);
+
+                for (ItemStack reward : randomCommonRewards) {
+                    player.getInventory().addItem(reward);
+                }
+            } else if (number > 85) {
+                int rewardCount = 1;
+                List<ItemStack> randomRareReward = getRareRewards(rewardCount);
+
+                for (ItemStack reward : randomRareReward) {
+                    player.getInventory().addItem(reward);
+                }
+            }
         }
     }
 
