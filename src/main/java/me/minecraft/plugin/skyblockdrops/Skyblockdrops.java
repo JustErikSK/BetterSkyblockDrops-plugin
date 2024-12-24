@@ -227,13 +227,13 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         String christmas_event = this.getConfig().getString("christmas_event", "true");
 
         Random random = new Random();
-        int number = random.nextInt(100);
+        LivingEntity ent = (LivingEntity) e.getEntity();
 
-        if (e.getEntity() instanceof LivingEntity) {
-            LivingEntity ent = (LivingEntity) e.getEntity();
-            if (christmas_event.equals("true")) {
+        if (christmas_event.equals("true")) {
+            if (e.getEntity() instanceof LivingEntity) {
                 if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
-                    if (number > 85) { // SANTA'S HAT - RED LEATHER HELMET (15%)
+                    int number1 = random.nextInt(100);
+                    if (number1 > 85) { // SANTA'S HAT - RED LEATHER HELMET (15%)
                         ItemStack redHelmet = new ItemStack(Material.LEATHER_HELMET, 1);
                         LeatherArmorMeta redHelmetMeta = (LeatherArmorMeta) redHelmet.getItemMeta();
                         redHelmetMeta.setColor(Color.fromRGB(255, 0, 0));
@@ -241,7 +241,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
                         redHelmet.setItemMeta(redHelmetMeta);
                         Objects.requireNonNull(ent.getEquipment()).setHelmet(redHelmet);
                     }
-                    if (number < 25) { // SANTA'S HELPER'S HAT - GREEN LEATHER HELMET (25%)
+                    if (number1 < 25) { // SANTA'S HELPER'S HAT - GREEN LEATHER HELMET (25%)
                         ItemStack greenHelmet = new ItemStack(Material.LEATHER_HELMET, 1);
                         LeatherArmorMeta greenHelmetMeta = (LeatherArmorMeta) greenHelmet.getItemMeta();
                         greenHelmetMeta.setColor(Color.fromRGB(69, 230, 0));
@@ -249,27 +249,33 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
                         greenHelmet.setItemMeta(greenHelmetMeta);
                         Objects.requireNonNull(ent.getEquipment()).setHelmet(greenHelmet);
                     }
-                        if (number < 10) { // SWEET CANDIES - SWEET BERRIES (10%)
-                            ItemStack candies = new ItemStack(Material.SWEET_BERRIES, 1);
-                            ItemMeta itemStackMeta = candies.getItemMeta();
-                            itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Sweet Candies");
-                            candies.setItemMeta(itemStackMeta);
-                            Objects.requireNonNull(ent.getEquipment()).setItemInMainHand(candies);
-                        }
-                        if (number > 10 || number < 20) { // GINGERBREAD COOKIES - COOKIES (10%)
-                            ItemStack cookies = new ItemStack(Material.COOKIE, 1);
-                            ItemMeta itemStackMeta = cookies.getItemMeta();
-                            itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Gingerbread Cookies");
-                            cookies.setItemMeta(itemStackMeta);
-                            Objects.requireNonNull(ent.getEquipment()).setItemInMainHand(cookies);
-                        }
+                }
+            }
+            if (e.getEntity() instanceof LivingEntity) {
+                if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
+                    int number2 = random.nextInt(100);
+                    if (number2 < 20) { // SWEET CANDIES - SWEET BERRIES (10%)
+                        ItemStack candies = new ItemStack(Material.SWEET_BERRIES, 1);
+                        ItemMeta itemStackMeta = candies.getItemMeta();
+                        itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Sweet Candies");
+                        candies.setItemMeta(itemStackMeta);
+                        Objects.requireNonNull(ent.getEquipment()).setItemInMainHand(candies);
+                    }
+                    if (number2 < 10) { // GINGERBREAD COOKIES - COOKIES (10%)
+                        ItemStack cookies = new ItemStack(Material.COOKIE, 1);
+                        ItemMeta itemStackMeta = cookies.getItemMeta();
+                        itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Gingerbread Cookies");
+                        cookies.setItemMeta(itemStackMeta);
+                        Objects.requireNonNull(ent.getEquipment()).setItemInMainHand(cookies);
+                    }
                 }
             }
         }
     }
 
-    @EventHandler
-    public void christmasEventDeath(EntityDeathEvent e) {
+            //@EventHandler
+            //public void christmasEventDeath(EntityDeathEvent e) {
 
-    }
+            //}
+
 }
