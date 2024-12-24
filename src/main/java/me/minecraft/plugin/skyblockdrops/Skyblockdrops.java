@@ -1,21 +1,24 @@
 package me.minecraft.plugin.skyblockdrops;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
 
@@ -273,9 +276,55 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         }
     }
 
-            //@EventHandler
-            //public void christmasEventDeath(EntityDeathEvent e) {
+    public ItemStack createPresent() { // Present creation
+        ItemStack present = new ItemStack(Material.CHEST);
+        ItemMeta meta = present.getItemMeta();
 
-            //}
+        if (meta != null) {
+            meta.setDisplayName(ChatColor.GOLD + "Present");
+            meta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click to open!", ChatColor.GRAY + "Contains a surprise!"));
+            meta.getPersistentDataContainer().set(new NamespacedKey(this, "isPresent"), PersistentDataType.BYTE, (byte) 1);
+            present.setItemMeta(meta);
+        }
+        return present;
+    }
 
+    private boolean isPresent(ItemStack item) { // isPresent method
+        if (item == null || !item.hasItemMeta()) return false;
+
+        ItemMeta meta = item.getItemMeta();
+        return meta != null && meta.getPersistentDataContainer().has(new NamespacedKey(this, "isPresent"), PersistentDataType.BYTE);
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent e) { // Present placement prevention
+        Player player = e.getPlayer();
+        ItemStack item = e.getItemInHand();
+
+        if (isPresent(item)) {
+            e.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You can't place this Present!");
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteraction(PlayerInteractEvent e) {
+        Player player = e.getPlayer();
+        Action action = e.getAction();
+        ItemStack item = e.getItem();
+
+        if ((action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && isPresent(item)) {
+            e.setCancelled(true);
+            player.sendMessage(ChatColor.GREEN + "You've opened a Present and found some goodies!");
+            player.getInventory().removeItem(item);
+            player.getInventory().addItem(new ItemStack(Material.DIAMOND, 3));
+        }
+    }
+
+    @EventHandler
+    public void christmasEventDeath(EntityDeathEvent e) {
+        if (Math.random() < 0.1) {
+            e.getDrops().add(createPresent());
+        }
+    }
 }
