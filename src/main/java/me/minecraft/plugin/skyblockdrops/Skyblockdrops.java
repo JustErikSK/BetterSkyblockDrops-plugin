@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -285,7 +286,10 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         if (meta != null) {
             meta.setDisplayName(ChatColor.GOLD + "Present");
             meta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click to open!", ChatColor.GRAY + "Contains a surprise!"));
-            meta.getPersistentDataContainer().set(new NamespacedKey(this, "isPresent"), PersistentDataType.BYTE, (byte) 1);
+
+            PersistentDataContainer data = meta.getPersistentDataContainer();
+            data.set(new NamespacedKey(this, "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
+
             present.setItemMeta(meta);
         }
         return present;
@@ -295,7 +299,10 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         if (item == null || !item.hasItemMeta()) return false;
 
         ItemMeta meta = item.getItemMeta();
-        return meta != null && meta.getPersistentDataContainer().has(new NamespacedKey(this, "isPresent"), PersistentDataType.BYTE);
+        if (meta == null) return false;
+
+        PersistentDataContainer data = meta.getPersistentDataContainer();
+        return data.has(new NamespacedKey(this, "uniqueID"), PersistentDataType.STRING);
     }
 
     @EventHandler
