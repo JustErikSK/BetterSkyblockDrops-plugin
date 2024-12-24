@@ -231,10 +231,10 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         String christmas_event = this.getConfig().getString("christmas_event", "true");
 
         Random random = new Random();
-        LivingEntity ent = (LivingEntity) e.getEntity();
 
         if (christmas_event.equals("true")) {
             if (e.getEntity() instanceof LivingEntity) {
+                LivingEntity ent = (LivingEntity) e.getEntity();
                 if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
                     int number1 = random.nextInt(100);
                     if (number1 > 85) { // SANTA'S HAT - RED LEATHER HELMET (15%)
@@ -256,6 +256,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
                 }
             }
             if (e.getEntity() instanceof LivingEntity) {
+                LivingEntity ent = (LivingEntity) e.getEntity();
                 if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
                     int number2 = random.nextInt(100);
                     if (number2 < 30) { // SWEET CANDIES - SWEET BERRIES (15%)
