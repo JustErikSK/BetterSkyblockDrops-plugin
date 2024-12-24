@@ -356,7 +356,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         List<ItemStack> randomRareRewards = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
-            randomRareRewards.add(getRandomCommonRewards());
+            randomRareRewards.add(getRandomRareReward());
         }
         return randomRareRewards;
     }
