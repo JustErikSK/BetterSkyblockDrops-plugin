@@ -18,9 +18,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public final class Skyblockdrops extends JavaPlugin implements Listener {
 
@@ -55,6 +53,8 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         config.addDefault("glowstone_drop", true);
         config.addDefault("halloween_event", false);
         config.addDefault("christmas_event", true);
+
+        initializeRewards();
     }
 
     @EventHandler
@@ -257,14 +257,14 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
             if (e.getEntity() instanceof LivingEntity) {
                 if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
                     int number2 = random.nextInt(100);
-                    if (number2 < 20) { // SWEET CANDIES - SWEET BERRIES (10%)
+                    if (number2 < 30) { // SWEET CANDIES - SWEET BERRIES (15%)
                         ItemStack candies = new ItemStack(Material.SWEET_BERRIES, 1);
                         ItemMeta itemStackMeta = candies.getItemMeta();
                         itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Sweet Candies");
                         candies.setItemMeta(itemStackMeta);
                         Objects.requireNonNull(ent.getEquipment()).setItemInMainHand(candies);
                     }
-                    if (number2 < 10) { // GINGERBREAD COOKIES - COOKIES (10%)
+                    if (number2 < 15) { // GINGERBREAD COOKIES - COOKIES (15%)
                         ItemStack cookies = new ItemStack(Material.COOKIE, 1);
                         ItemMeta itemStackMeta = cookies.getItemMeta();
                         itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Gingerbread Cookies");
@@ -305,6 +305,29 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
             e.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You can't place this Present!");
         }
+    }
+
+    private final List<ItemStack> commonRewards = new ArrayList<>();
+    private final List<ItemStack> rareRewards = new ArrayList<>();
+
+    public void initializeRewards() {
+        commonRewards.add(new ItemStack(Material.GLOW_BERRIES, 2));
+        commonRewards.add(new ItemStack(Material.SNOWBALL, 3));
+        commonRewards.add(new ItemStack(Material.EGG));
+        commonRewards.add(new ItemStack(Material.WHEAT_SEEDS, 2));
+        commonRewards.add(new ItemStack(Material.KELP));
+        commonRewards.add(new ItemStack(Material.INK_SAC, 2));
+        commonRewards.add(new ItemStack(Material.GLASS_BOTTLE));
+        commonRewards.add(new ItemStack(Material.BOWL));
+        commonRewards.add(new ItemStack(Material.SUGAR, 3));
+        commonRewards.add(new ItemStack(Material.YELLOW_DYE));
+
+        rareRewards.add(new ItemStack(Material.DIAMOND));
+        rareRewards.add(new ItemStack(Material.ENDER_PEARL, 2));
+        rareRewards.add(new ItemStack(Material.EMERALD, 5));
+        rareRewards.add(new ItemStack(Material.ANCIENT_DEBRIS));
+        rareRewards.add(new ItemStack(Material.COPPER_INGOT, 10));
+        rareRewards.add(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
     }
 
     @EventHandler
