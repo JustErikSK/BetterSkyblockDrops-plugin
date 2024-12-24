@@ -312,7 +312,6 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
         if (isPresent(item)) {
             e.setCancelled(true);
-            player.sendMessage(ChatColor.RED + "You can't place this Present!");
         }
     }
 
@@ -377,20 +376,19 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
         if ((action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && isPresent(item)) {
             e.setCancelled(true);
-            player.sendMessage(ChatColor.GREEN + "You've opened a Present and found some goodies!");
             player.getInventory().removeItem(item);
 
             Random random = new Random();
             int number = random.nextInt(100);
 
-            if (number < 85) {
+            if (number < 85) { // 85%
                 int rewardCount = ThreadLocalRandom.current().nextInt(1, 3);
                 List<ItemStack> randomCommonRewards = getCommonRewards(rewardCount);
 
                 for (ItemStack reward : randomCommonRewards) {
                     player.getInventory().addItem(reward);
                 }
-            } else if (number > 85) {
+            } else if (number > 85) { // 15%
                 int rewardCount = 1;
                 List<ItemStack> randomRareReward = getRareRewards(rewardCount);
 
@@ -403,7 +401,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
     @EventHandler
     public void christmasEventDeath(EntityDeathEvent e) {
-        if (Math.random() < 0.1) {
+        if (Math.random() < 0.1) { // 10%
             e.getDrops().add(createPresent());
         }
     }
