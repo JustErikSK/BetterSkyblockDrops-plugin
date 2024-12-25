@@ -403,8 +403,11 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
     @EventHandler
     public void christmasEventDeath(EntityDeathEvent e) {
-        if (Math.random() < 0.1) { // 10%
-            e.getDrops().add(createPresent());
+        String christmas_event = this.getConfig().getString("christmas_event", "true");
+        if (christmas_event.equals("true")) {
+            if (Math.random() < 0.1) { // 10%
+                e.getDrops().add(createPresent());
+            }
         }
     }
 }
