@@ -387,7 +387,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
                 for (ItemStack reward : randomCommonRewards) {
                     player.getInventory().addItem(reward);
-                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
                 }
             } else if (number > 85) { // 15%
                 int rewardCount = 1;
@@ -395,7 +395,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
                 for (ItemStack reward : randomRareReward) {
                     player.getInventory().addItem(reward);
-                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.5f);
                 }
             }
         }
