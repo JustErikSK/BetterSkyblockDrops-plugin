@@ -1,7 +1,7 @@
 # BetterSkyblockDrops Plugin
 This plugin brings new loot for zombies, blazes, husks, skeletons, wither skeletons, withers and zombified piglins.
 
-Now with seasonal events too! *(only Halloween event is available at the moment, more to come in the future)*
+Now with seasonal events too! (Halloween and Christmas)
 
 **INSTALLATION:**
 1. Use one of these options to download BetterSkyblockDrops plugin:
@@ -13,7 +13,7 @@ Now with seasonal events too! *(only Halloween event is available at the moment,
 3. After first server start with our plugin, new folder with a config file will be created in your server's plugins folder. You can change the drop percentages and amounts, enable/disable events or enable/disable some drops.
 
 
-_Values are accurate from version v2!_
+_Values are accurate from version v2.3!_
 ### List of all drops:
 - **Gravel - from Zombies** _(10% for 1)_
 - **Quartz - from Blazes** _(10% for 1)_
@@ -27,3 +27,12 @@ _Values are accurate from version v2!_
 - **Diamond - drops from any of the mobs mentioned above** _(0.1% for 1)_
 - **Carved Pumpkin - as a head decoration for these mobs** _(40%)_
 - **Jack o'Lantern - as a head decoration for these mobs** _(10%)_
+
+### Christmas Event:
+- **Santa's Hat - mobs can spawn with a red Santa's Hat, can drop from them too** _(15%)_
+- **Santa's Helper's Hat - mobs can spawn with a green Santa's Helper's Hat, can drop from them too** _(25%)_
+- **Sweet Candies - mobs can spawn holding Sweet Candies, can drop from them too** _(15%)_
+- **Gingerbread Cookies - mobs can spawn holding Gingerbread Cookies, can drop from them too** _(15%)_
+- **Present - mobs can drop present** _(10%)_
+  - **Common loot** (just normal items like eggs or seeds) _(85%)_
+  - **Rare loot** (really good items like diamonds or golden apples) _(15%)_
