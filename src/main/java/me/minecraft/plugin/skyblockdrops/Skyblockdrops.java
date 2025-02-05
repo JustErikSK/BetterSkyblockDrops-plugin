@@ -54,7 +54,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         config.addDefault("glowstone_amount", 1);
         config.addDefault("glowstone_drop", true);
         config.addDefault("halloween_event", false);
-        config.addDefault("christmas_event", true);
+        config.addDefault("christmas_event", false);
 
         initializeRewards();
     }
@@ -229,7 +229,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
     public void christmasEventSpawn(EntitySpawnEvent e) {
 
         // GET THE DEFAULT VALUE FOR CHRISTMAS EVENT RULE
-        String christmas_event = this.getConfig().getString("christmas_event", "true");
+        String christmas_event = this.getConfig().getString("christmas_event", "false");
 
         Random random = new Random();
 
@@ -403,7 +403,7 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
 
     @EventHandler
     public void christmasEventDeath(EntityDeathEvent e) {
-        String christmas_event = this.getConfig().getString("christmas_event", "true");
+        String christmas_event = this.getConfig().getString("christmas_event", "false");
         if (christmas_event.equals("true")) {
             if (Math.random() < 0.1) { // 10%
                 e.getDrops().add(createPresent());

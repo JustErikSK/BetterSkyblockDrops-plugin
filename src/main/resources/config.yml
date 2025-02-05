@@ -64,8 +64,8 @@ glowstone_drop: true
 # Halloween Event - true/false (default False - except Halloween season)
 # Christmas Event - true/false (default False - except Christmas season)
 halloween_event: false
-christmas_event: true
+christmas_event: false
 
-# Last updated for BetterSkyblockDrops v2.3
-# Works for versions 1.21 - 1.21.4
+# Last updated for BetterSkyblockDrops v2.3.2
+# Version 2.3.2 works for MC versions 1.21 - 1.21.4
 # End of config file
