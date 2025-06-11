@@ -3,6 +3,8 @@ This plugin brings new loot for zombies, blazes, husks, skeletons, wither skelet
 
 Now with seasonal events too! (Halloween and Christmas)
 
+You can find detailed information about this plugin on our Wiki https://with-rage-studios-plugins.fandom.com/wiki/Better_Skyblock_Drops
+
 **INSTALLATION:**
 1. Use one of these options to download BetterSkyblockDrops plugin:
 - [GitHub releases] https://github.com/JustErikSK/BetterSkyblockDrops-plugin/releases
@@ -13,7 +15,7 @@ Now with seasonal events too! (Halloween and Christmas)
 3. After first server start with our plugin, new folder with a config file will be created in your server's plugins folder. You can change the drop percentages and amounts, enable/disable events or enable/disable some drops.
 
 
-_Values are accurate from version v2.3!_
+_Values are accurate from version v2.3.2.1!_
 ### List of all drops:
 - **Gravel - from Zombies** _(10% for 1)_
 - **Quartz - from Blazes** _(10% for 1)_
@@ -23,12 +25,12 @@ _Values are accurate from version v2.3!_
 - **Ancient Debris - from Withers** _(100% for 4)_ - 1.16 and above
 - **Magma Cream - from Zombified Piglins** _(10% for 1)_ - 1.13 and above
 
-### Halloween Event: (DISABLED BY DEFAULT, AVAILABLE THROUGH THE CONFIG FILE)
+### Halloween Event: (Disabled by default, available through the config file)
 - **Diamond - drops from any of the mobs mentioned above** _(0.1% for 1)_
 - **Carved Pumpkin - as a head decoration for these mobs** _(40%)_
 - **Jack o'Lantern - as a head decoration for these mobs** _(10%)_
 
-### Christmas Event:
+### Christmas Event: (Disabled by default, available through the config file)
 - **Santa's Hat - mobs can spawn with a red Santa's Hat, can drop from them too** _(15%)_
 - **Santa's Helper's Hat - mobs can spawn with a green Santa's Helper's Hat, can drop from them too** _(25%)_
 - **Sweet Candies - mobs can spawn holding Sweet Candies, can drop from them too** _(15%)_
