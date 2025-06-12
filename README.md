@@ -1,4 +1,4 @@
-# BetterSkyblockDrops Plugin
+# Better Skyblock Drops Plugin
 This plugin brings new loot for zombies, blazes, husks, skeletons, wither skeletons, withers and zombified piglins.
 
 Now with seasonal events too! (Halloween and Christmas)
