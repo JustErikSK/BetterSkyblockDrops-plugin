@@ -15,7 +15,7 @@ You can find detailed information about this plugin on our Wiki https://with-rag
 3. After first server start with our plugin, new folder with a config file will be created in your server's plugins folder. You can change the drop percentages and amounts, enable/disable events or enable/disable some drops.
 
 
-_Values are accurate from version v2.3.2.1!_
+_Values are accurate from version v2.3.2.2!_
 ### List of all drops:
 - **Gravel - from Zombies** _(10% for 1)_
 - **Quartz - from Blazes** _(10% for 1)_
