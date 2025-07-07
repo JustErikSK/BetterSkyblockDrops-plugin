@@ -15,7 +15,7 @@ You can find detailed information about this plugin on our Wiki https://with-rag
 3. After first server start with our plugin, new folder with a config file will be created in your server's plugins folder. You can change the drop percentages and amounts, enable/disable events or enable/disable some drops.
 
 
-_Values are accurate from version v2.3.2.2!_
+_Values are accurate from version v2.3.2.3!_
 ### List of all drops:
 - **Gravel - from Zombies** _(10% for 1)_
 - **Quartz - from Blazes** _(10% for 1)_
@@ -39,4 +39,4 @@ _Values are accurate from version v2.3.2.2!_
   - **Common loot** (just normal items like eggs or seeds) _(85%)_
   - **Rare loot** (really good items like diamonds or golden apples) _(15%)_
 
-This plugin works on Minecraft versions 1.8 - 1.21.5 (the newest version works only on 1.21 - 1.21.5)
+This plugin works on Minecraft versions 1.8 - 1.21.7 (the newest version works only on 1.21 - 1.21.7)
