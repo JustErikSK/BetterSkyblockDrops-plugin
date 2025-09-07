@@ -66,6 +66,5 @@ glowstone_drop: true
 halloween_event: false
 christmas_event: false
 
-# Last updated for BetterSkyblockDrops v2.3.2.4
-# Version 2.3.2.4 works for MC versions 1.21 - 1.21.8
+# Version 2.3.3 works for MC versions 1.21 - 1.21.8
 # End of config file

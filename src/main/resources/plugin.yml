@@ -1,6 +1,7 @@
 name: Skyblockdrops
-version: 2.3.2.4
+version: 2.3.3
 main: me.minecraft.plugin.skyblockdrops.Skyblockdrops
 api-version: 1.21
 authors: [ JustErikSK ]
 description: This plugin brings new loot for some mobs, plugin is highly configurable using config.yml!
+folia-supported: true
