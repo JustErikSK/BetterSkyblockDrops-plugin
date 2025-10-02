@@ -66,5 +66,5 @@ glowstone_drop: true
 halloween_event: false
 christmas_event: false
 
-# Version 2.3.3 works for MC versions 1.21 - 1.21.8
+# Version 2.3.3.1 works for MC versions 1.21 - 1.21.9
 # End of config file
