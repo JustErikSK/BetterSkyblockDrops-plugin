@@ -39,4 +39,4 @@ _Values are accurate from version v2.3.2.3!_
   - **Common loot** (just normal items like eggs or seeds) _(85%)_
   - **Rare loot** (the best items like diamonds or golden apples) _(15%)_
 
-This plugin works on Minecraft versions 1.8 - 1.21.8 (the newest version works only on 1.21 - 1.21.8)
+This plugin works on Minecraft versions 1.8 - 1.21.9 (the newest version works only on 1.21 - 1.21.9)
