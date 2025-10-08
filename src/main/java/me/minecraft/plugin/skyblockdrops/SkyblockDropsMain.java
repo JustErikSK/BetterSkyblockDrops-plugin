@@ -22,13 +22,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class Skyblockdrops extends JavaPlugin implements Listener {
+public final class SkyblockDropsMain extends JavaPlugin implements Listener {
+
+    private HalloweenEvent halloweenEvent;
 
     @Override
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "BetterSkyblockDrops >> Plugin has been enabled!");
 
         this.getServer().getPluginManager().registerEvents(this, this);
+        halloweenEvent = new HalloweenEvent(this);
+        this.getServer().getPluginManager().registerEvents(halloweenEvent, this);
         saveDefaultConfig();
 
         FileConfiguration config = this.getConfig();
@@ -57,6 +61,10 @@ public final class Skyblockdrops extends JavaPlugin implements Listener {
         config.addDefault("christmas_event", false);
 
         initializeRewards();
+    }
+
+    public void reloadAll() {
+        reloadConfig();
     }
 
     @EventHandler

@@ -1,6 +1,6 @@
 name: Skyblockdrops
 version: 2.4
-main: me.minecraft.plugin.skyblockdrops.Skyblockdrops
+main: me.minecraft.plugin.skyblockdrops.SkyblockDropsMain
 api-version: 1.21
 authors: [ JustErikSK ]
 description: This plugin brings new loot for some mobs, plugin is highly configurable using config.yml!
