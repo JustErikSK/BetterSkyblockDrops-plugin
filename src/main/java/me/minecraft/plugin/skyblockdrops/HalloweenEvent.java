@@ -123,7 +123,7 @@ public class HalloweenEvent implements Listener {
     }
 
     public ItemStack createHalloweenPresent() {
-        ItemStack present = new ItemStack(Material.CARVED_PUMPKIN);
+        ItemStack present = new ItemStack(Material.PUMPKIN);
         ItemMeta meta = present.getItemMeta();
 
         if (meta != null) {
@@ -146,49 +146,6 @@ public class HalloweenEvent implements Listener {
         return flag != null && flag == (byte)1;
     }
 
-    private static boolean isHelmetRawSlot(InventoryClickEvent e) {
-        return e.getView().getTopInventory().getType() == InventoryType.CRAFTING && e.getRawSlot() == 5;
-    }
-
-    @EventHandler
-    public void onInvShiftClick(InventoryClickEvent e) {
-        if (!e.getClick().isShiftClick()) return;
-        ItemStack current = e.getCurrentItem();
-        if (!isHalloweenPresent(current)) return;
-        e.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onInvNumberKeyClick(InventoryClickEvent e) {
-        if (e.getClick() != ClickType.NUMBER_KEY) return;
-        if (!isHelmetRawSlot(e)) return;
-
-        Player p = (Player) e.getWhoClicked();
-        int hotbar = e.getHotbarButton();
-        if (hotbar < 0) return;
-
-        ItemStack hot = p.getInventory().getItem(hotbar);
-        if (isHalloweenPresent(hot)) {
-            e.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onInvDrag(InventoryDragEvent e) {
-        if (!isHalloweenPresent(e.getOldCursor())) return;
-        if (e.getView().getTopInventory().getType() == InventoryType.CRAFTING
-                && e.getRawSlots().contains(5)) {
-            e.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onDispenseArmor(BlockDispenseArmorEvent e) {
-        if (isHalloweenPresent(e.getItem())) {
-            e.setCancelled(true);
-        }
-    }
-
     @EventHandler
     public void onHalloweenPresentPlace(BlockPlaceEvent e) {
         Player player = e.getPlayer();
@@ -207,7 +164,7 @@ public class HalloweenEvent implements Listener {
         // ==== Spooky Tier reward list ====
         commonRewards.add(new ItemStack(Material.ROTTEN_FLESH, 2));
         commonRewards.add(new ItemStack(Material.SPIDER_EYE, 2));
-        commonRewards.add(new ItemStack(Material.PUMPKIN, 1));
+        commonRewards.add(new ItemStack(Material.CARVED_PUMPKIN, 1));
         commonRewards.add(new ItemStack(Material.BONE, 2));
         commonRewards.add(new ItemStack(Material.GUNPOWDER, 2));
         commonRewards.add(new ItemStack(Material.COOKED_BEEF, 1));
