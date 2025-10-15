@@ -13,6 +13,7 @@ import org.bukkit.event.block.BlockDispenseArmorEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -145,25 +146,43 @@ public class HalloweenEvent implements Listener {
         return flag != null && flag == (byte)1;
     }
 
-    @EventHandler(ignoreCancelled = true)
-    public void onInvClick(InventoryClickEvent e) {
-        if (!(e.getWhoClicked() instanceof Player)) return;
+    private static boolean isHelmetRawSlot(InventoryClickEvent e) {
+        return e.getView().getTopInventory().getType() == InventoryType.CRAFTING && e.getRawSlot() == 5;
+    }
 
-        ItemStack cursor = e.getCursor();
-        if (isHalloweenPresent(cursor) && e.getSlotType() == InventoryType.SlotType.ARMOR) {
+    @EventHandler
+    public void onInvShiftClick(InventoryClickEvent e) {
+        if (!e.getClick().isShiftClick()) return;
+        ItemStack current = e.getCurrentItem();
+        if (!isHalloweenPresent(current)) return;
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInvNumberKeyClick(InventoryClickEvent e) {
+        if (e.getClick() != ClickType.NUMBER_KEY) return;
+        if (!isHelmetRawSlot(e)) return;
+
+        Player p = (Player) e.getWhoClicked();
+        int hotbar = e.getHotbarButton();
+        if (hotbar < 0) return;
+
+        ItemStack hot = p.getInventory().getItem(hotbar);
+        if (isHalloweenPresent(hot)) {
             e.setCancelled(true);
         }
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler
     public void onInvDrag(InventoryDragEvent e) {
         if (!isHalloweenPresent(e.getOldCursor())) return;
-        if (e.getRawSlots().contains(39)) {
+        if (e.getView().getTopInventory().getType() == InventoryType.CRAFTING
+                && e.getRawSlots().contains(5)) {
             e.setCancelled(true);
         }
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler
     public void onDispenseArmor(BlockDispenseArmorEvent e) {
         if (isHalloweenPresent(e.getItem())) {
             e.setCancelled(true);
