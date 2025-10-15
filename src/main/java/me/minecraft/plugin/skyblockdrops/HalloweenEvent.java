@@ -1,9 +1,6 @@
 package me.minecraft.plugin.skyblockdrops;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
@@ -13,12 +10,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.Particle;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
@@ -41,29 +39,38 @@ public class HalloweenEvent implements Listener {
     }
 
     @EventHandler
-    public void halloweenEventSpawn(EntitySpawnEvent e) {
+    public void halloweenEventSpawn(CreatureSpawnEvent e) {
 
         // GET THE DEFAULT VALUE FOR HALLOWEEN EVENT RULE
         boolean halloweenEnabled = plugin.getConfig().getBoolean("halloween_event", false);
 
-        ItemStack pumpkin = new ItemStack(Material.CARVED_PUMPKIN);
-        ItemStack fancy_pumpkin = new ItemStack(Material.JACK_O_LANTERN);
+        if (e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER) return;
 
-        Random random = new Random();
-        int number = random.nextInt(100);
+        LivingEntity mob = e.getEntity();
+        EntityType type = mob.getType();
 
-        if (e.getEntity() instanceof LivingEntity) {
-            LivingEntity ent = (LivingEntity) e.getEntity();
-            if (halloweenEnabled) {
-                if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
-                    if (number > 60) {
-                        Objects.requireNonNull(ent.getEquipment()).setHelmet(pumpkin);
-                    }
-                    if (number < 10) {
-                        Objects.requireNonNull(ent.getEquipment()).setHelmet(fancy_pumpkin);
-                    }
-                }
-            }
+        if (type != EntityType.ZOMBIE &&
+            type != EntityType.HUSK &&
+            type != EntityType.WITHER_SKELETON &&
+            type != EntityType.ZOMBIFIED_PIGLIN &&
+            type != EntityType.SKELETON) return;
+
+        if (mob.getEquipment() == null || mob.getEquipment().getHelmet() != null) return;
+
+        int roll = java.util.concurrent.ThreadLocalRandom.current().nextInt(100);
+
+        if (roll < 10) { // 10% for jack o'lantern
+            mob.getEquipment().setHelmet(new ItemStack(Material.JACK_O_LANTERN));
+
+            Location loc = mob.getLocation().add(0, 1.0, 0);
+            mob.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, loc, 40, 0.4, 0.6, 0.4, 0.01);
+            mob.getWorld().spawnParticle(Particle.SOUL, loc, 20, 0.4, 0.4, 0.4, 0.0);
+        } else if (roll < 50) { // 40% for carved pumpkin
+            mob.getEquipment().setHelmet(new ItemStack(Material.CARVED_PUMPKIN));
+
+            Particle.DustOptions orange = new Particle.DustOptions(Color.fromRGB(255, 140, 0), 1.3f);
+            Location loc = mob.getLocation().add(0, 1.0, 0);
+            mob.getWorld().spawnParticle(Particle.DUST, loc, 60, 0.5, 0.6, 0.5, 0.0, orange);
         }
     }
 
@@ -267,8 +274,8 @@ public class HalloweenEvent implements Listener {
 
         if (halloweenEnabled) {
             if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.BLAZE || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.WITHER || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
-                if (number == 1) {
-                    e.getDrops().add(new ItemStack(Material.DIAMOND));
+                if (number < 30) { // 30% to get a present
+                    e.getDrops().add(createHalloweenPresent());
                 }
             }
         }
