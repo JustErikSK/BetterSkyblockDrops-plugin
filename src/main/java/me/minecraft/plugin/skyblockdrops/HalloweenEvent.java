@@ -3,6 +3,7 @@ package me.minecraft.plugin.skyblockdrops;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
@@ -10,9 +11,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,6 +24,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class HalloweenEvent implements Listener {
 
@@ -161,6 +165,94 @@ public class HalloweenEvent implements Listener {
             book4.setItemMeta(metaBook4);
         }
         rareRewards.add(book4); // Luck of the Sea 1 book
+    }
+
+    private ItemStack getRandomCommonRewards() {
+        if (commonRewards.isEmpty()) return null;
+
+        int randomIndexC = ThreadLocalRandom.current().nextInt(commonRewards.size());
+        return commonRewards.get(randomIndexC).clone();
+    }
+    private List<ItemStack> getCommonRewards(int amount) {
+        List<ItemStack> randomCommonRewards = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            randomCommonRewards.add(getRandomCommonRewards());
+        }
+        return randomCommonRewards;
+    }
+
+    private ItemStack getRandomRareRewards() {
+        if (rareRewards.isEmpty()) return null;
+
+        int randomIndexC = ThreadLocalRandom.current().nextInt(rareRewards.size());
+        return rareRewards.get(randomIndexC).clone();
+    }
+    private List<ItemStack> getRareRewards(int amount) {
+        List<ItemStack> randomRareRewards = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            randomRareRewards.add(getRandomRareRewards());
+        }
+        return randomRareRewards;
+    }
+
+    private ItemStack getRandomLegendaryRewards() {
+        if (legendaryRewards.isEmpty()) return null;
+
+        int randomIndexC = ThreadLocalRandom.current().nextInt(legendaryRewards.size());
+        return legendaryRewards.get(randomIndexC).clone();
+    }
+    private List<ItemStack> getLegendaryRewards(int amount) {
+        List<ItemStack> randomLegendaryRewards = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            randomLegendaryRewards.add(getRandomLegendaryRewards());
+        }
+        return randomLegendaryRewards;
+    }
+
+    @EventHandler
+    public void onPlayerInteraction(PlayerInteractEvent e) {
+        Player player = e.getPlayer();
+        Action action = e.getAction();
+        ItemStack item = e.getItem();
+
+        if ((action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && isHalloweenPresent(item)) {
+            e.setCancelled(true);
+            player.getInventory().removeItem(item);
+
+            Random random = new Random();
+            int number = random.nextInt(100);
+
+            if (number < 51 && number > 25) { // 25% for Common Reward
+                int rewardCount = ThreadLocalRandom.current().nextInt(1, 4);
+                List<ItemStack> randomCommonRewards = getCommonRewards(rewardCount);
+
+                for (ItemStack reward : randomCommonRewards) {
+                    player.getInventory().addItem(reward);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                }
+            }
+            if (number < 21 && number > 10) { // 10% for Rare Reward
+                int rewardCount = ThreadLocalRandom.current().nextInt(1, 2);
+                List<ItemStack> randomRareRewards = getRareRewards(rewardCount);
+
+                for (ItemStack reward : randomRareRewards) {
+                    player.getInventory().addItem(reward);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                }
+            }
+            if (number == 0) { // 1% for Legendary Reward
+                int rewardCount = ThreadLocalRandom.current().nextInt(1, 1);
+                List<ItemStack> randomLegendaryRewards = getLegendaryRewards(rewardCount);
+
+                for (ItemStack reward : randomLegendaryRewards) {
+                    player.getInventory().addItem(reward);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                }
+            }
+        }
     }
 
     @EventHandler
