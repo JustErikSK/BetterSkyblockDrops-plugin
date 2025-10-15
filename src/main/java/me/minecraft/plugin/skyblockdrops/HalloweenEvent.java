@@ -19,7 +19,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.Particle;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.Plugin;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -27,6 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class HalloweenEvent implements Listener {
 
     private final SkyblockDropsMain plugin;
+    private final java.util.Map<java.util.UUID, org.bukkit.scheduler.BukkitTask> auras = new java.util.HashMap<>();
 
     public HalloweenEvent(SkyblockDropsMain plugin) {
         this.plugin = plugin;
@@ -38,11 +38,45 @@ public class HalloweenEvent implements Listener {
         return cfg.getBoolean("halloween_event", false);
     }
 
+    private void startPumpkinAura(LivingEntity mob) {
+        java.util.UUID id = mob.getUniqueId();
+        if (auras.containsKey(id)) return;
+
+        org.bukkit.scheduler.BukkitTask task = new org.bukkit.scheduler.BukkitRunnable() {
+            @Override public void run() {
+                if (!mob.isValid() || mob.isDead() || mob.getEquipment() == null) {
+                    stop();
+                    return;
+                }
+                ItemStack h = mob.getEquipment().getHelmet();
+                if (h == null) { stop(); return; }
+
+                Material m = h.getType();
+                if (m != Material.CARVED_PUMPKIN && m != Material.JACK_O_LANTERN) { stop(); return; }
+
+                Location loc = mob.getLocation().add(0, 1.0, 0);
+                if (m == Material.JACK_O_LANTERN) {
+                    mob.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, loc, 4, 0.15, 0.25, 0.15, 0.0);
+                    mob.getWorld().spawnParticle(Particle.SOUL,            loc, 2, 0.15, 0.15, 0.15, 0.0);
+                } else { // carved
+                    Particle.DustOptions orange = new Particle.DustOptions(org.bukkit.Color.fromRGB(255,140,0), 1.1f);
+                    mob.getWorld().spawnParticle(Particle.DUST, loc, 6, 0.2, 0.3, 0.2, 0.0, orange);
+                }
+            }
+            private void stop() {
+                org.bukkit.scheduler.BukkitTask t = auras.remove(id);
+                if (t != null) t.cancel();
+            }
+        }.runTaskTimer(plugin, 0L, 10L);
+
+        auras.put(id, task);
+    }
+
     @EventHandler
     public void halloweenEventSpawn(CreatureSpawnEvent e) {
 
         // GET THE DEFAULT VALUE FOR HALLOWEEN EVENT RULE
-        boolean halloweenEnabled = plugin.getConfig().getBoolean("halloween_event", false);
+        if (!plugin.getConfig().getBoolean("halloween_event", false)) return;
 
         if (e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER) return;
 
@@ -55,23 +89,30 @@ public class HalloweenEvent implements Listener {
             type != EntityType.ZOMBIFIED_PIGLIN &&
             type != EntityType.SKELETON) return;
 
-        if (mob.getEquipment() == null || mob.getEquipment().getHelmet() != null) return;
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            if (!mob.isValid() || mob.isDead()) return;
+            if (mob.getEquipment() == null) return;
 
-        int roll = java.util.concurrent.ThreadLocalRandom.current().nextInt(100);
+            int roll = java.util.concurrent.ThreadLocalRandom.current().nextInt(100);
+            boolean jack = (roll < 10);
+            boolean carved = !jack && roll < 50;
 
-        if (roll < 10) { // 10% for jack o'lantern
-            mob.getEquipment().setHelmet(new ItemStack(Material.JACK_O_LANTERN));
+            if (!jack && !carved) return;
+
+            ItemStack helm = new ItemStack(jack ? Material.JACK_O_LANTERN : Material.CARVED_PUMPKIN);
+            mob.getEquipment().setHelmet(helm);
+            mob.getEquipment().setHelmetDropChance(0.0f);
 
             Location loc = mob.getLocation().add(0, 1.0, 0);
-            mob.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, loc, 40, 0.4, 0.6, 0.4, 0.01);
-            mob.getWorld().spawnParticle(Particle.SOUL, loc, 20, 0.4, 0.4, 0.4, 0.0);
-        } else if (roll < 50) { // 40% for carved pumpkin
-            mob.getEquipment().setHelmet(new ItemStack(Material.CARVED_PUMPKIN));
-
-            Particle.DustOptions orange = new Particle.DustOptions(Color.fromRGB(255, 140, 0), 1.3f);
-            Location loc = mob.getLocation().add(0, 1.0, 0);
-            mob.getWorld().spawnParticle(Particle.DUST, loc, 60, 0.5, 0.6, 0.5, 0.0, orange);
-        }
+            if (jack) {
+                mob.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, loc, 40, 0.4, 0.6, 0.4, 0.01);
+                mob.getWorld().spawnParticle(Particle.SOUL, loc, 20, 0.4, 0.4, 0.4, 0.0);
+            } else {
+                Particle.DustOptions orange = new Particle.DustOptions(Color.fromRGB(255,140,0), 1.3f);
+                mob.getWorld().spawnParticle(Particle.DUST, loc, 60, 0.5, 0.6, 0.5, 0.0, orange);
+            }
+            startPumpkinAura(mob);
+        }, 5L);
     }
 
     public ItemStack createHalloweenPresent() {
