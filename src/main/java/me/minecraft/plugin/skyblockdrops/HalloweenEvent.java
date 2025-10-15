@@ -231,7 +231,7 @@ public class HalloweenEvent implements Listener {
 
                 for (ItemStack reward : randomCommonRewards) {
                     player.getInventory().addItem(reward);
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 1.5f);
                 }
             }
             if (number < 21 && number > 10) { // 10% for Rare Reward
@@ -240,7 +240,7 @@ public class HalloweenEvent implements Listener {
 
                 for (ItemStack reward : randomRareRewards) {
                     player.getInventory().addItem(reward);
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 1.0f);
                 }
             }
             if (number == 0) { // 1% for Legendary Reward
@@ -249,7 +249,7 @@ public class HalloweenEvent implements Listener {
 
                 for (ItemStack reward : randomLegendaryRewards) {
                     player.getInventory().addItem(reward);
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 0.5f);
                 }
             }
         }
