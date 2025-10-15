@@ -24,18 +24,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public final class SkyblockDropsMain extends JavaPlugin implements Listener {
 
-    private HalloweenEvent halloweenEvent;
-    private ChristmasEvent christmasEvent;
-
     @Override
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "BetterSkyblockDrops >> Plugin has been enabled!");
 
         this.getServer().getPluginManager().registerEvents(this, this);
-        halloweenEvent = new HalloweenEvent(this);
-        this.getServer().getPluginManager().registerEvents(halloweenEvent, this);
-        christmasEvent = new ChristmasEvent(this);
-        this.getServer().getPluginManager().registerEvents(christmasEvent, this);
+        getServer().getPluginManager().registerEvents(new HalloweenEvent(this), this);
+        getServer().getPluginManager().registerEvents(new ChristmasEvent(this), this);
         saveDefaultConfig();
 
         FileConfiguration config = this.getConfig();

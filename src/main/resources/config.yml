@@ -64,7 +64,8 @@ glowstone_drop: true
 # Halloween Event - true/false (default False - except Halloween season)
 # Christmas Event - true/false (default False - except Christmas season)
 halloween_event: true
-christmas_event: false
+# Christmas Event is temporarily disabled, we're reworking it, and it's not done yet in this update.
+# christmas_event: false
 
 # Version 2.4 works for MC versions 1.21 - 1.21.10
 # End of config file

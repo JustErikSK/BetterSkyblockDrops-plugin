@@ -83,7 +83,7 @@ public class HalloweenEvent implements Listener {
             meta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click to open!", ChatColor.GRAY + "Contains a surprise!"));
 
             PersistentDataContainer data = meta.getPersistentDataContainer();
-            data.set(new NamespacedKey((Plugin) this, "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
+            data.set(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
 
             present.setItemMeta(meta);
         }
@@ -97,7 +97,7 @@ public class HalloweenEvent implements Listener {
         if (meta == null) return false;
 
         PersistentDataContainer data = meta.getPersistentDataContainer();
-        return data.has(new NamespacedKey((Plugin) this, "uniqueID"), PersistentDataType.STRING);
+        return data.has(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING);
     }
 
     @EventHandler
@@ -251,7 +251,7 @@ public class HalloweenEvent implements Listener {
                 }
             }
             if (number == 0) { // 1% for Legendary Reward
-                int rewardCount = ThreadLocalRandom.current().nextInt(1, 1);
+                int rewardCount = 1;
                 List<ItemStack> randomLegendaryRewards = getLegendaryRewards(rewardCount);
 
                 for (ItemStack reward : randomLegendaryRewards) {
@@ -269,7 +269,7 @@ public class HalloweenEvent implements Listener {
         boolean halloweenEnabled = plugin.getConfig().getBoolean("halloween_event", false);
 
         Random random = new Random();
-        int number = random.nextInt(1000);
+        int number = random.nextInt(100);
         LivingEntity ent = e.getEntity();
 
         if (halloweenEnabled) {

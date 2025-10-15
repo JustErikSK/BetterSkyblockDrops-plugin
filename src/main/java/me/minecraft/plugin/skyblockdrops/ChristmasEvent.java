@@ -25,9 +25,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ChristmasEvent implements Listener {
 
     private final SkyblockDropsMain plugin;
+    private final NamespacedKey PRESENT_KEY;
 
     public ChristmasEvent(SkyblockDropsMain plugin) {
         this.plugin = plugin;
+        this.PRESENT_KEY = new NamespacedKey(plugin, "present");
         initializeRewards();
     }
 
@@ -99,7 +101,7 @@ public class ChristmasEvent implements Listener {
             meta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click to open!", ChatColor.GRAY + "Contains a surprise!"));
 
             PersistentDataContainer data = meta.getPersistentDataContainer();
-            data.set(new NamespacedKey((Plugin) this, "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
+            data.set(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
 
             present.setItemMeta(meta);
         }
@@ -113,7 +115,7 @@ public class ChristmasEvent implements Listener {
         if (meta == null) return false;
 
         PersistentDataContainer data = meta.getPersistentDataContainer();
-        return data.has(new NamespacedKey((Plugin) this, "uniqueID"), PersistentDataType.STRING);
+        return data.has(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING);
     }
 
     @EventHandler
