@@ -9,9 +9,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockDispenseArmorEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -26,10 +30,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class HalloweenEvent implements Listener {
 
     private final SkyblockDropsMain plugin;
+    private final NamespacedKey PRESENT_KEY;
     private final java.util.Map<java.util.UUID, org.bukkit.scheduler.BukkitTask> auras = new java.util.HashMap<>();
 
     public HalloweenEvent(SkyblockDropsMain plugin) {
         this.plugin = plugin;
+        this.PRESENT_KEY = new NamespacedKey(plugin, "present");
         initializeRewards();
     }
 
@@ -132,13 +138,36 @@ public class HalloweenEvent implements Listener {
     }
 
     private boolean isHalloweenPresent(ItemStack item) {
-        if (item == null || !item.hasItemMeta()) return false;
-
+        if (item == null) return false;
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return false;
+        Byte flag = meta.getPersistentDataContainer().get(PRESENT_KEY, PersistentDataType.BYTE);
+        return flag != null && flag == (byte)1;
+    }
 
-        PersistentDataContainer data = meta.getPersistentDataContainer();
-        return data.has(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING);
+    @EventHandler(ignoreCancelled = true)
+    public void onInvClick(InventoryClickEvent e) {
+        if (!(e.getWhoClicked() instanceof Player)) return;
+
+        ItemStack cursor = e.getCursor();
+        if (isHalloweenPresent(cursor) && e.getSlotType() == InventoryType.SlotType.ARMOR) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onInvDrag(InventoryDragEvent e) {
+        if (!isHalloweenPresent(e.getOldCursor())) return;
+        if (e.getRawSlots().contains(39)) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onDispenseArmor(BlockDispenseArmorEvent e) {
+        if (isHalloweenPresent(e.getItem())) {
+            e.setCancelled(true);
+        }
     }
 
     @EventHandler
