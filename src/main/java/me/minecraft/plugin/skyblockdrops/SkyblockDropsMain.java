@@ -11,7 +11,9 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -24,6 +26,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public final class SkyblockDropsMain extends JavaPlugin implements Listener {
 
+    private BloodMoonManager bloodMoon;
+
     @Override
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "BetterSkyblockDrops >> Plugin has been enabled!");
@@ -31,6 +35,16 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new HalloweenEvent(this), this);
         getServer().getPluginManager().registerEvents(new ChristmasEvent(this), this);
+        getServer().getPluginManager().registerEvents(new BloodMoonListener(this, bloodMoon), this);
+        getServer().getPluginManager().registerEvents(new Listener() {
+            @EventHandler public void onJoin(PlayerJoinEvent e) {
+                bloodMoon.handleJoinOrWorldChange(e.getPlayer());
+            }
+            @EventHandler public void onChange(PlayerChangedWorldEvent e) {
+                bloodMoon.handleJoinOrWorldChange(e.getPlayer());
+            }
+        }, this);
+
         saveDefaultConfig();
 
         FileConfiguration config = this.getConfig();
@@ -57,6 +71,7 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
         config.addDefault("glowstone_drop", true);
         config.addDefault("halloween_event", false);
         config.addDefault("christmas_event", false);
+
     }
 
     public void reloadAll() {
