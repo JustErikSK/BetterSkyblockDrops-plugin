@@ -28,6 +28,7 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
 
     private BloodMoonManager bloodMoon;
     private BloodMoonListener bloodMoonListener;
+    private CreepyMessageScheduler creepy;
 
     @Override
     public void onEnable() {
@@ -49,6 +50,9 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
                 bloodMoon.handleJoinOrWorldChange(e.getPlayer());
             }
         }, this);
+
+        creepy = new CreepyMessageScheduler(this);
+        creepy.start();
 
         saveDefaultConfig();
 
@@ -87,6 +91,7 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
     public void onDisable() {
         if (bloodMoon != null) bloodMoon.shutdown();
         if (bloodMoonListener != null) bloodMoonListener.shutdown();
+        if (creepy != null) creepy.shutdown();
     }
 
     @EventHandler
