@@ -16,6 +16,7 @@ public final class BloodMoonManager {
     private final JavaPlugin plugin;
     private final Set<World> active = new HashSet<>();
     private final Map<UUID, BossBar> bars = new HashMap<>();
+    private final Map<UUID, Boolean> wasNight = new HashMap<>();
 
     public BloodMoonManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -35,22 +36,24 @@ public final class BloodMoonManager {
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
             for (World w : Bukkit.getWorlds()) {
                 long time = w.getTime();
-                long day = w.getFullTime() / 24000L;
+                boolean isNight = (time >= 13000 || time < 0);
+                boolean prev = wasNight.getOrDefault(w.getUID(), false);
 
-                if (time == 13000) {
-                    boolean trigger;
-                    trigger = (day % 8L) == 0L;
-                    if (trigger) startBloodMoon(w);
-                    else endBloodMoon(w);
+                if (isNight && !prev) {
+                    long day = w.getFullTime() / 24000L;
+                    int phase = (int)(day % 8L);
+                    if (phase == 0) startBloodMoon(w); else endBloodMoon(w);
                 }
-                if (time == 0) endBloodMoon(w);
+                if (!isNight && prev) endBloodMoon(w);
+
+                wasNight.put(w.getUID(), isNight);
             }
         }, 20L, 40L);
     }
 
     private void startBloodMoon(World w) {
         if (active.add(w)) {
-            BossBar bar = Bukkit.createBossBar("§c§lBLOOD MOON", BarColor.RED, BarStyle.SOLID);
+            BossBar bar = Bukkit.createBossBar("§cBLOOD MOON", BarColor.RED, BarStyle.SOLID);
             bar.setProgress(1.0);
             bars.put(w.getUID(), bar);
             for (Player p : w.getPlayers()) bar.addPlayer(p);
