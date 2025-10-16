@@ -23,7 +23,17 @@ public final class CreepyMessageScheduler {
             "You weren’t alone in that tunnel.",
             "It’s getting closer.",
             "I saw eyes in the fog.",
-            "Why did the torch go out?"
+            "Why did the torch go out?",
+            "The shadows are counting your steps…",
+            "There was another torch here. Who took it?",
+            "Something is breathing just out of sight.",
+            "Your name echoed back… but you didn’t say it.",
+            "The wind is blowing against you… underground.",
+            "A door closed. There are no doors here.",
+            "You left five torches. There are four.",
+            "I saw a figure at the edge of your render distance.",
+            "Cold fingers brushed your shoulder.",
+            "It stopped moving when you looked at it."
     );
 
     public CreepyMessageScheduler(JavaPlugin plugin) {
