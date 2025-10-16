@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -23,8 +24,10 @@ public class BloodMoonListener implements Listener {
 
     private final JavaPlugin plugin;
     private final BloodMoonManager manager;
-
     private final Map<UUID, BukkitTask> auras = new HashMap<>();
+    private static boolean isHostile(LivingEntity e) {
+        return (e instanceof Monster);
+    }
 
     public BloodMoonListener(JavaPlugin plugin, BloodMoonManager manager) {
         this.plugin = plugin;
@@ -42,6 +45,7 @@ public class BloodMoonListener implements Listener {
         if (r == CreatureSpawnEvent.SpawnReason.SPAWNER) return;
 
         LivingEntity mob = e.getEntity();
+        if (!isHostile(mob)) return;
 
         mob.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20*60*5, 0, true, false, true)); // 5m Str I
         mob.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,          20*60*5, 0, true, false, true)); // 5m Speed I
