@@ -33,6 +33,8 @@ public class BloodMoonListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onSpawn(CreatureSpawnEvent e) {
+        if (manager == null) return;
+
         World w = e.getLocation().getWorld();
         if (w == null || !manager.isActive(w)) return;
 
@@ -73,5 +75,12 @@ public class BloodMoonListener implements Listener {
         }.runTaskTimer(plugin, 0L, 10L);
 
         auras.put(id, task);
+    }
+
+    public void shutdown() {
+        for (BukkitTask t : auras.values()) {
+            if (t != null) t.cancel();
+        }
+        auras.clear();
     }
 }

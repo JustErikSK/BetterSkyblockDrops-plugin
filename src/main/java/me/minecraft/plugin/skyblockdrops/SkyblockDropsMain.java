@@ -27,6 +27,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class SkyblockDropsMain extends JavaPlugin implements Listener {
 
     private BloodMoonManager bloodMoon;
+    private BloodMoonListener bloodMoonListener;
 
     @Override
     public void onEnable() {
@@ -35,6 +36,10 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new HalloweenEvent(this), this);
         getServer().getPluginManager().registerEvents(new ChristmasEvent(this), this);
+
+        bloodMoon = new BloodMoonManager(this);
+        bloodMoonListener = new BloodMoonListener(this, bloodMoon);
+        getServer().getPluginManager().registerEvents(bloodMoonListener, this);
         getServer().getPluginManager().registerEvents(new BloodMoonListener(this, bloodMoon), this);
         getServer().getPluginManager().registerEvents(new Listener() {
             @EventHandler public void onJoin(PlayerJoinEvent e) {
@@ -76,6 +81,12 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
 
     public void reloadAll() {
         reloadConfig();
+    }
+
+    @Override
+    public void onDisable() {
+        if (bloodMoon != null) bloodMoon.shutdown();
+        if (bloodMoonListener != null) bloodMoonListener.shutdown();
     }
 
     @EventHandler

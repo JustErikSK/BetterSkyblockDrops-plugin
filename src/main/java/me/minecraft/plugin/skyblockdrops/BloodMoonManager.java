@@ -22,6 +22,11 @@ public final class BloodMoonManager {
         runWorldTickWatcher();
     }
 
+    public void shutdown() {
+        bars.values().forEach(bar -> { bar.removeAll(); bar.setVisible(false); });
+        bars.clear();
+    }
+
     public boolean isActive(World w) {
         return active.contains(w);
     }
