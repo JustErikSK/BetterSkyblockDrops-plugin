@@ -2,6 +2,8 @@
 # You can set your own drop percentages and drop amounts here or even disable drops completely
 # If you set a number that's more/less than the set maximum/minimum, plugin will automatically use the default value
 
+# To reload config, use command /skyblockdrops reload
+
 # Gravel drops from Zombies
 # Gravel drop percentage (Default = 20, Min: 1, Max: 100)
 # Gravel drop amount (Default = 1, Min: 1, Max: 10)
@@ -64,7 +66,7 @@ glowstone_drop: true
 # Halloween Event - true/false (default False - except Halloween season)
 # Christmas Event - true/false (default False - except Christmas season)
 halloween_event: true
-# Christmas Event is temporarily disabled, we're reworking it, and it's not done yet in this update.
+# Christmas Event is temporarily disabled, we're reworking it, and it's not done yet for this update.
 # christmas_event: false
 
 # Version 2.4 works for MC versions 1.21 - 1.21.10

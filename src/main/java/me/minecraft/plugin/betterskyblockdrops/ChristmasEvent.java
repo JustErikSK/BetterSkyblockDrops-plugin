@@ -1,4 +1,4 @@
-package me.minecraft.plugin.skyblockdrops;
+package me.minecraft.plugin.betterskyblockdrops;
 
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;

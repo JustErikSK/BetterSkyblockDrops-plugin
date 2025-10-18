@@ -1,7 +1,16 @@
-name: Skyblockdrops
+name: BetterSkyblockDrops
 version: 2.4
-main: me.minecraft.plugin.skyblockdrops.SkyblockDropsMain
+main: me.minecraft.plugin.betterskyblockdrops.SkyblockDropsMain
 api-version: 1.21
 authors: [ JustErikSK ]
 description: This plugin brings new loot for some mobs, plugin is highly configurable using config.yml!
 folia-supported: true
+commands:
+  betterskyblockdrops:
+    description: BetterSkyblockDrops commands
+    usage: /betterskyblockdrops reload
+    permission: betterskyblockdrops.admin
+
+permissions:
+  betterskyblockdrops.admin:
+    default: op
