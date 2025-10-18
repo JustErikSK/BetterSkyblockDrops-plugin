@@ -8,6 +8,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
@@ -17,6 +18,9 @@ public final class BloodMoonManager {
     private final Set<World> active = new HashSet<>();
     private final Map<UUID, BossBar> bars = new HashMap<>();
     private final Map<UUID, Boolean> wasNight = new HashMap<>();
+    private BukkitTask watcher;
+
+    private volatile boolean enabled = true;
 
     public BloodMoonManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -27,6 +31,15 @@ public final class BloodMoonManager {
         bars.values().forEach(bar -> { bar.removeAll(); bar.setVisible(false); });
         bars.clear();
     }
+
+    public void setEnabled(boolean on) {
+        this.enabled = on;
+        if (!on) {
+            for (World w : Bukkit.getWorlds()) endBloodMoon(w);
+        }
+    }
+
+    public boolean isEnabled() { return enabled; }
 
     public boolean isActive(World w) {
         return active.contains(w);

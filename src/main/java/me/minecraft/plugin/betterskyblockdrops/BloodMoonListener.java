@@ -36,6 +36,8 @@ public class BloodMoonListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onSpawn(CreatureSpawnEvent e) {
+        if (!plugin.getConfig().getBoolean("halloween_event", false)) return;
+
         if (manager == null) return;
 
         World w = e.getLocation().getWorld();

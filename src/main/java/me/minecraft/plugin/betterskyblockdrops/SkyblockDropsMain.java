@@ -86,6 +86,9 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
 
     public void reloadAll() {
         reloadConfig();
+        boolean on = getConfig().getBoolean("halloween_event", false);
+        if (bloodMoon != null) bloodMoon.setEnabled(on);
+
         if (halloween != null) halloween.reloadSettings();
         //if (christmas != null) christmas.reloadSettings();
         if (creepy != null) { creepy.shutdown(); creepy.start(); }
