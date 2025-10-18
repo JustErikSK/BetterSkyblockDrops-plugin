@@ -6,6 +6,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -126,8 +128,12 @@ public class HalloweenEvent implements Listener {
             meta.setDisplayName(ChatColor.GOLD + "Trick or Treat!");
             meta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click to open!", ChatColor.GRAY + "Contains a surprise!"));
 
-            PersistentDataContainer data = meta.getPersistentDataContainer();
-            data.set(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
+            meta.getPersistentDataContainer().set(PRESENT_KEY, PersistentDataType.BYTE, (byte)1);
+
+            meta.getPersistentDataContainer().set(new NamespacedKey(plugin, "uniqueID"),
+                    PersistentDataType.STRING, java.util.UUID.randomUUID().toString());
+            meta.addEnchant(Enchantment.LOOTING, 1, true);
+            meta.addItemFlags(org.bukkit.inventory.ItemFlag.HIDE_ENCHANTS, org.bukkit.inventory.ItemFlag.HIDE_ATTRIBUTES);
 
             present.setItemMeta(meta);
         }
@@ -142,13 +148,11 @@ public class HalloweenEvent implements Listener {
         return flag != null && flag == (byte)1;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onHalloweenPresentPlace(BlockPlaceEvent e) {
-        Player player = e.getPlayer();
-        ItemStack item = e.getItemInHand();
-
-        if (isHalloweenPresent(item)) {
+        if (isHalloweenPresent(e.getItemInHand())) {
             e.setCancelled(true);
+            plugin.getLogger().info("Present use intercepted; cancelling place");
         }
     }
 
@@ -263,43 +267,61 @@ public class HalloweenEvent implements Listener {
 
     @EventHandler
     public void onPlayerInteraction(PlayerInteractEvent e) {
-        Player player = e.getPlayer();
-        Action action = e.getAction();
+        org.bukkit.event.block.Action action = e.getAction();
+        if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) return;
+
         ItemStack item = e.getItem();
+        if (!isHalloweenPresent(item)) return;
 
-        if ((action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && isHalloweenPresent(item)) {
-            e.setCancelled(true);
-            player.getInventory().removeItem(item);
+        e.setUseItemInHand(Event.Result.DENY);
+        e.setUseInteractedBlock(Event.Result.DENY);
+        e.setCancelled(true);
 
-            Random random = new Random();
-            int number = random.nextInt(100);
+        Player player = e.getPlayer();
 
-            if (number < 51 && number > 25) { // 25% for Common Reward
-                int rewardCount = ThreadLocalRandom.current().nextInt(1, 4);
-                List<ItemStack> randomCommonRewards = getCommonRewards(rewardCount);
-
-                for (ItemStack reward : randomCommonRewards) {
-                    player.getInventory().addItem(reward);
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 1.5f);
-                }
+        org.bukkit.inventory.EquipmentSlot hand = e.getHand();
+        if (hand == org.bukkit.inventory.EquipmentSlot.HAND) {
+            ItemStack main = player.getInventory().getItemInMainHand();
+            if (main != null && isHalloweenPresent(main)) {
+                if (main.getAmount() <= 1) player.getInventory().setItemInMainHand(null);
+                else main.setAmount(main.getAmount() - 1);
             }
-            if (number < 21 && number > 10) { // 10% for Rare Reward
-                int rewardCount = ThreadLocalRandom.current().nextInt(1, 2);
-                List<ItemStack> randomRareRewards = getRareRewards(rewardCount);
-
-                for (ItemStack reward : randomRareRewards) {
-                    player.getInventory().addItem(reward);
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 1.0f);
-                }
+        } else {
+            ItemStack off = player.getInventory().getItemInOffHand();
+            if (off != null && isHalloweenPresent(off)) {
+                if (off.getAmount() <= 1) player.getInventory().setItemInOffHand(null);
+                else off.setAmount(off.getAmount() - 1);
             }
-            if (number == 0) { // 1% for Legendary Reward
-                int rewardCount = 1;
-                List<ItemStack> randomLegendaryRewards = getLegendaryRewards(rewardCount);
+        }
 
-                for (ItemStack reward : randomLegendaryRewards) {
-                    player.getInventory().addItem(reward);
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 0.5f);
-                }
+        Random random = new Random();
+        int number = random.nextInt(100);
+
+        if (number < 51 && number > 25) {
+            int rewardCount = ThreadLocalRandom.current().nextInt(1, 4);
+            List<ItemStack> randomCommonRewards = getCommonRewards(rewardCount);
+
+            for (ItemStack reward : randomCommonRewards) {
+                player.getInventory().addItem(reward);
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 1.5f);
+            }
+        }
+        if (number < 21 && number > 10) {
+            int rewardCount = ThreadLocalRandom.current().nextInt(1, 2);
+            List<ItemStack> randomRareRewards = getRareRewards(rewardCount);
+
+            for (ItemStack reward : randomRareRewards) {
+                player.getInventory().addItem(reward);
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 1.0f);
+            }
+        }
+        if (number == 0) {
+            int rewardCount = 1;
+            List<ItemStack> randomLegendaryRewards = getLegendaryRewards(rewardCount);
+
+            for (ItemStack reward : randomLegendaryRewards) {
+                player.getInventory().addItem(reward);
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 0.5f);
             }
         }
     }
