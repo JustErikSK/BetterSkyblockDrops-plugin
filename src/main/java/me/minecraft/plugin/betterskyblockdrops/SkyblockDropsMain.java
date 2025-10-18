@@ -22,22 +22,22 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
     private BloodMoonListener bloodMoonListener;
     private CreepyMessageScheduler creepy;
     private HalloweenEvent halloween;
-    private ChristmasEvent christmas;
+    //private ChristmasEvent christmas;
 
     @Override
     public void onEnable() {
         getLogger().info("Loading drop percentages and amount...");
         getLogger().info("Loading the Halloween Event class...");
-        getLogger().info("Loading the Christmas Event class...");
+        //getLogger().info("Loading the Christmas Event class...");
         getLogger().info("Loading the Blood Moon Manager and Listener...");
         getLogger().info("Loading the Creepy Message Scheduler...");
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "BetterSkyblockDrops >> Plugin has been enabled!");
         this.getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new HalloweenEvent(this), this);
-        getServer().getPluginManager().registerEvents(new ChristmasEvent(this), this);
+        //getServer().getPluginManager().registerEvents(new ChristmasEvent(this), this);
 
         halloween = new HalloweenEvent(this);
-        christmas = new ChristmasEvent(this);
+        //christmas = new ChristmasEvent(this);
 
         bloodMoon = new BloodMoonManager(this);
         bloodMoonListener = new BloodMoonListener(this, bloodMoon);
@@ -87,7 +87,7 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
     public void reloadAll() {
         reloadConfig();
         if (halloween != null) halloween.reloadSettings();
-        if (christmas != null) christmas.reloadSettings();
+        //if (christmas != null) christmas.reloadSettings();
         if (creepy != null) { creepy.shutdown(); creepy.start(); }
     }
 
