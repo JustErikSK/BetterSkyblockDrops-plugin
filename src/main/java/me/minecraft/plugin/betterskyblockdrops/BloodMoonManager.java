@@ -36,7 +36,26 @@ public final class BloodMoonManager {
         this.enabled = on;
         if (!on) {
             for (World w : Bukkit.getWorlds()) endBloodMoon(w);
+            return;
         }
+
+        reevaluateNow();
+    }
+
+    public void reevaluateNow() {
+        for (World w : Bukkit.getWorlds()) {
+            long time = w.getTime();
+            boolean isNight = (time >= 13000 || time < 1000);
+            long day = w.getFullTime() / 24000L;
+            int phase = (int)(day % 8L);
+
+            if (enabled && isNight && phase == 0) {
+                startBloodMoon(w);
+            } else {
+                endBloodMoon(w);
+            }
+        }
+        for (Player p : Bukkit.getOnlinePlayers()) handleJoinOrWorldChange(p);
     }
 
     public boolean isEnabled() { return enabled; }

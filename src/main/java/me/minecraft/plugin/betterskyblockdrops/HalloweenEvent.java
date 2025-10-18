@@ -7,6 +7,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -141,7 +142,7 @@ public class HalloweenEvent implements Listener {
         return flag != null && flag == (byte)1;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onHalloweenPresentPlace(BlockPlaceEvent e) {
         Player player = e.getPlayer();
         ItemStack item = e.getItemInHand();
