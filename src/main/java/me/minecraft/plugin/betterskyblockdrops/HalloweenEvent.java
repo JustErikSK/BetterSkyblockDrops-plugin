@@ -129,10 +129,9 @@ public class HalloweenEvent implements Listener {
             meta.setDisplayName(ChatColor.GOLD + "Trick or Treat!");
             meta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click to open!", ChatColor.GRAY + "Contains a surprise!"));
 
-            meta.getPersistentDataContainer().set(PRESENT_KEY, PersistentDataType.BYTE, (byte)1);
+            PersistentDataContainer data = meta.getPersistentDataContainer();
+            data.set(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
 
-            meta.getPersistentDataContainer().set(new NamespacedKey(plugin, "uniqueID"),
-                    PersistentDataType.STRING, java.util.UUID.randomUUID().toString());
             meta.addEnchant(Enchantment.LOOTING, 1, true);
             meta.addItemFlags(org.bukkit.inventory.ItemFlag.HIDE_ENCHANTS, org.bukkit.inventory.ItemFlag.HIDE_ATTRIBUTES);
 
@@ -142,11 +141,13 @@ public class HalloweenEvent implements Listener {
     }
 
     private boolean isHalloweenPresent(ItemStack item) {
-        if (item == null) return false;
+        if (item == null || !item.hasItemMeta()) return false;
+
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return false;
-        Byte flag = meta.getPersistentDataContainer().get(PRESENT_KEY, PersistentDataType.BYTE);
-        return flag != null && flag == (byte)1;
+
+        PersistentDataContainer data = meta.getPersistentDataContainer();
+        return data.has(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING);
     }
 
     @EventHandler
@@ -281,7 +282,7 @@ public class HalloweenEvent implements Listener {
             Random random = new Random();
             int number = random.nextInt(100);
 
-            if (number < 51 && number > 25) { // 25% for Common Reward
+            if (number >= 25) {
                 int rewardCount = ThreadLocalRandom.current().nextInt(1, 4);
                 List<ItemStack> randomCommonRewards = getCommonRewards(rewardCount);
 
@@ -290,7 +291,7 @@ public class HalloweenEvent implements Listener {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 1.5f);
                 }
             }
-            if (number < 21 && number > 10) { // 10% for Rare Reward
+            if (number < 25 && number >= 1) {
                 int rewardCount = ThreadLocalRandom.current().nextInt(1, 2);
                 List<ItemStack> randomRareRewards = getRareRewards(rewardCount);
 
@@ -299,7 +300,7 @@ public class HalloweenEvent implements Listener {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 2.0f, 1.5f);
                 }
             }
-            if (number == 0) { // 1% for Legendary Reward
+            if (number == 0) {
                 int rewardCount = ThreadLocalRandom.current().nextInt(1, 1);
                 List<ItemStack> randomLegendaryRewards = getLegendaryRewards(rewardCount);
 
