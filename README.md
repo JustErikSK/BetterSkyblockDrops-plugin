@@ -15,7 +15,7 @@ You can find detailed information about this plugin on our Wiki https://with-rag
 3. After first server start with our plugin, new folder with a config file will be created in your server's plugins folder. You can change the drop percentages and amounts, enable/disable events or enable/disable some drops.
 
 
-_Values are accurate from version v2.3.2.3!_
+_Values are accurate from version v2.4.1!_
 ### List of all drops:
 - **Gravel - from Zombies** _(10% for 1)_
 - **Quartz - from Blazes** _(10% for 1)_
@@ -25,18 +25,4 @@ _Values are accurate from version v2.3.2.3!_
 - **Ancient Debris - from Withers** _(100% for 4)_ - 1.16 and above
 - **Magma Cream - from Zombified Piglins** _(10% for 1)_ - 1.13 and above
 
-### Halloween Event: (Disabled by default, available through the config file)
-- **Diamond - drops from any of the mobs mentioned above** _(0.1% for 1)_
-- **Carved Pumpkin - as a head decoration for these mobs** _(40%)_
-- **Jack o'Lantern - as a head decoration for these mobs** _(10%)_
-
-### Christmas Event: (Disabled by default, available through the config file)
-- **Santa's Hat - mobs can spawn with a red Santa's Hat, can drop from them too** _(15%)_
-- **Santa's Helper's Hat - mobs can spawn with a green Santa's Helper's Hat, can drop from them too** _(25%)_
-- **Sweet Candies - mobs can spawn holding Sweet Candies, can drop from them too** _(15%)_
-- **Gingerbread Cookies - mobs can spawn holding Gingerbread Cookies, can drop from them too** _(15%)_
-- **Present - mobs can drop present** _(10%)_
-  - **Common loot** (just normal items like eggs or seeds) _(85%)_
-  - **Rare loot** (the best items like diamonds or golden apples) _(15%)_
-
-This plugin works on Minecraft versions 1.8 - 1.21.9 (the newest version works only on 1.21 - 1.21.9)
+This plugin works on Minecraft versions 1.8 - 1.21.10 (the newest version works only on 1.21 - 1.21.10)

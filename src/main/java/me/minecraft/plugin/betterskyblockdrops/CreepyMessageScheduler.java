@@ -51,6 +51,7 @@ public final class CreepyMessageScheduler {
     }
 
     private void broadcastOnce() {
+        if (!plugin.getConfig().getBoolean("halloween_event", false)) return;
         if (Bukkit.getOnlinePlayers().isEmpty() || messages.isEmpty()) return;
 
         String msg = messages.get(ThreadLocalRandom.current().nextInt(messages.size()));
