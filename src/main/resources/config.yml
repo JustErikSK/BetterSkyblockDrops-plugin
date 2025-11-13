@@ -61,12 +61,7 @@ glowstone_amount: 1
 glowstone_drop: true
 
 # Rules for events:
-# Events are disabled by default (unless it's event season like Halloween in October)
-# It's highly recommended to only use 1 event at a time, they will most probably work together but some features might not work as intended!
-# Halloween Event - true/false (default False - except Halloween season)
-# Christmas Event - true/false (default False - except Christmas season)
-halloween_event: false
-# Christmas Event is temporarily disabled, we're reworking it, and it's not done yet for this update.
+# Christmas Event and Halloween Event are temporarily disabled.
 
 # Version 2.4.1 works for MC versions 1.21 - 1.21.10
 # End of config file

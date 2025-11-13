@@ -16,24 +16,26 @@ import java.util.*;
 
 public final class SkyblockDropsMain extends JavaPlugin implements Listener {
 
-    private BloodMoonManager bloodMoon;
-    private BloodMoonListener bloodMoonListener;
-    private CreepyMessageScheduler creepy;
-    private HalloweenEvent halloweenEvent;
+    //private BloodMoonManager bloodMoon;
+    //private BloodMoonListener bloodMoonListener;
+    //private CreepyMessageScheduler creepy;
+    //private HalloweenEvent halloweenEvent;
 
     @Override
     public void onEnable() {
         getLogger().info("Loading drop percentages and amount...");
+/*
         getLogger().info("Loading the Halloween Event class...");
-        //getLogger().info("Loading the Christmas Event class...");
+        getLogger().info("Loading the Christmas Event class...");
         getLogger().info("Loading the Blood Moon Manager and Listener...");
         getLogger().info("Loading the Creepy Message Scheduler...");
+*/
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "BetterSkyblockDrops >> Plugin has been enabled!");
         this.getServer().getPluginManager().registerEvents(this, this);
-
+/*
         halloweenEvent = new HalloweenEvent(this);
         getServer().getPluginManager().registerEvents(halloweenEvent, this);
-        //getServer().getPluginManager().registerEvents(new ChristmasEvent(this), this);
+        getServer().getPluginManager().registerEvents(new ChristmasEvent(this), this);
 
         bloodMoon = new BloodMoonManager(this);
         bloodMoonListener = new BloodMoonListener(this, bloodMoon);
@@ -50,7 +52,7 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
 
         creepy = new CreepyMessageScheduler(this);
         creepy.start();
-
+*/
         saveDefaultConfig();
 
         FileConfiguration config = this.getConfig();
@@ -75,16 +77,19 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
         config.addDefault("glowstone_perc", 10);
         config.addDefault("glowstone_amount", 1);
         config.addDefault("glowstone_drop", true);
+/*
         config.addDefault("halloween_event", false);
         config.addDefault("christmas_event", false);
-
+*/
     }
 
     @Override
     public void onDisable() {
+/*
         if (bloodMoon != null) bloodMoon.shutdown();
         if (bloodMoonListener != null) bloodMoonListener.shutdown();
         if (creepy != null) creepy.shutdown();
+*/
     }
 
     @EventHandler
