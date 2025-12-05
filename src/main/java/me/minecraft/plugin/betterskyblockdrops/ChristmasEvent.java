@@ -1,7 +1,6 @@
 package me.minecraft.plugin.betterskyblockdrops;
 
 import org.bukkit.*;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -30,11 +29,6 @@ public class ChristmasEvent implements Listener {
         this.plugin = plugin;
         this.PRESENT_KEY = new NamespacedKey(plugin, "present");
         initializeRewards();
-    }
-
-    public boolean reloadSettings() {
-        FileConfiguration cfg = plugin.getConfig();
-        return cfg.getBoolean("christmas_event", false);
     }
 
     @EventHandler

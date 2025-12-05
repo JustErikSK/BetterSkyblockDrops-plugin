@@ -1,8 +1,6 @@
 # Better Skyblock Drops Plugin
 This plugin brings new loot for zombies, blazes, husks, skeletons, wither skeletons, withers and zombified piglins.
 
-Now with seasonal events too! (Halloween and Christmas)
-
 You can find detailed information about this plugin on our Wiki https://with-rage-studios-plugins.fandom.com/wiki/Better_Skyblock_Drops
 
 **INSTALLATION:**
@@ -15,7 +13,7 @@ You can find detailed information about this plugin on our Wiki https://with-rag
 3. After first server start with our plugin, new folder with a config file will be created in your server's plugins folder. You can change the drop percentages and amounts, enable/disable events or enable/disable some drops.
 
 
-_Values are accurate from version v2.4.1!_
+_Values are accurate from version v2.5!_
 ### List of all drops:
 - **Gravel - from Zombies** _(10% for 1)_
 - **Quartz - from Blazes** _(10% for 1)_
@@ -25,4 +23,4 @@ _Values are accurate from version v2.4.1!_
 - **Ancient Debris - from Withers** _(100% for 4)_ - 1.16 and above
 - **Magma Cream - from Zombified Piglins** _(10% for 1)_ - 1.13 and above
 
-This plugin works on Minecraft versions 1.8 - 1.21.10 (the newest version works only on 1.21 - 1.21.10)
+This plugin works on Minecraft versions 1.8 - 1.21.11 (the newest version works only on 1.21 - 1.21.11)
