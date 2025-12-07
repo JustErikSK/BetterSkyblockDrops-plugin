@@ -33,9 +33,7 @@ public class ChristmasEvent implements Listener {
 
     @EventHandler
     public void christmasEventSpawn(EntitySpawnEvent e) {
-
-        // GET THE DEFAULT VALUE FOR CHRISTMAS EVENT RULE
-        boolean christmasEnabled = plugin.getConfig().getBoolean("christmas_event", false);
+        boolean christmasEnabled = plugin.getConfig().getBoolean("christmas_event", true);
 
         Random random = new Random();
 
@@ -44,21 +42,30 @@ public class ChristmasEvent implements Listener {
                 LivingEntity ent = (LivingEntity) e.getEntity();
                 if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
                     int number1 = random.nextInt(100);
-                    if (number1 > 85) { // SANTA'S HAT - RED LEATHER HELMET (15%)
-                        ItemStack redHelmet = new ItemStack(Material.LEATHER_HELMET, 1);
-                        LeatherArmorMeta redHelmetMeta = (LeatherArmorMeta) redHelmet.getItemMeta();
-                        redHelmetMeta.setColor(Color.fromRGB(255, 0, 0));
-                        redHelmetMeta.setDisplayName(ChatColor.GOLD + "Santa's Hat");
-                        redHelmet.setItemMeta(redHelmetMeta);
-                        Objects.requireNonNull(ent.getEquipment()).setHelmet(redHelmet);
+                    if (number1 > 85) {
+                        ItemStack orangeHelmet = new ItemStack(Material.LEATHER_HELMET, 1);
+                        LeatherArmorMeta orangeHelmetMeta = (LeatherArmorMeta) orangeHelmet.getItemMeta();
+                        orangeHelmetMeta.setColor(Color.fromRGB(245, 116, 2));
+                        orangeHelmet.setItemMeta(orangeHelmetMeta);
+                        Objects.requireNonNull(ent.getEquipment()).setHelmet(orangeHelmet);
                     }
-                    if (number1 < 25) { // SANTA'S HELPER'S HAT - GREEN LEATHER HELMET (25%)
+                    if (number1 < 25) {
                         ItemStack greenHelmet = new ItemStack(Material.LEATHER_HELMET, 1);
                         LeatherArmorMeta greenHelmetMeta = (LeatherArmorMeta) greenHelmet.getItemMeta();
-                        greenHelmetMeta.setColor(Color.fromRGB(69, 230, 0));
-                        greenHelmetMeta.setDisplayName(ChatColor.DARK_PURPLE + "Santa's Helper's Hat");
+                        greenHelmetMeta.setColor(Color.fromRGB(102, 227, 48));
                         greenHelmet.setItemMeta(greenHelmetMeta);
                         Objects.requireNonNull(ent.getEquipment()).setHelmet(greenHelmet);
+                    }
+                    if (number1 == 0 && ent.getType() == EntityType.ZOMBIE) {
+                        ItemStack redHelmet = new ItemStack(Material.LEATHER_HELMET, 1);
+                        LeatherArmorMeta redHelmetMeta = (LeatherArmorMeta) redHelmet.getItemMeta();
+                        redHelmetMeta.setColor(Color.fromRGB(227, 34, 34));
+                        redHelmet.setItemMeta(redHelmetMeta);
+                        Objects.requireNonNull(ent.getEquipment()).setHelmet(redHelmet);
+                        ent.setCustomName("§cSanta Claus");
+                        ent.setCustomNameVisible(true);
+                        ent.setRemoveWhenFarAway(false);
+                        ent.addScoreboardTag("santa_claus");
                     }
                 }
             }
@@ -66,14 +73,14 @@ public class ChristmasEvent implements Listener {
                 LivingEntity ent = (LivingEntity) e.getEntity();
                 if (ent.getType() == EntityType.ZOMBIE || ent.getType() == EntityType.HUSK || ent.getType() == EntityType.WITHER_SKELETON || ent.getType() == EntityType.ZOMBIFIED_PIGLIN || ent.getType() == EntityType.SKELETON) {
                     int number2 = random.nextInt(100);
-                    if (number2 < 30) { // SWEET CANDIES - SWEET BERRIES (15%)
+                    if (number2 < 30) {
                         ItemStack candies = new ItemStack(Material.SWEET_BERRIES, 1);
                         ItemMeta itemStackMeta = candies.getItemMeta();
                         itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Sweet Candies");
                         candies.setItemMeta(itemStackMeta);
                         Objects.requireNonNull(ent.getEquipment()).setItemInMainHand(candies);
                     }
-                    if (number2 < 15) { // GINGERBREAD COOKIES - COOKIES (15%)
+                    if (number2 < 15) {
                         ItemStack cookies = new ItemStack(Material.COOKIE, 1);
                         ItemMeta itemStackMeta = cookies.getItemMeta();
                         itemStackMeta.setDisplayName(ChatColor.DARK_PURPLE + "Gingerbread Cookies");
@@ -85,13 +92,13 @@ public class ChristmasEvent implements Listener {
         }
     }
 
-    public ItemStack createPresent() { // Present creation
+    public ItemStack createPresent() {
         ItemStack present = new ItemStack(Material.CHEST);
         ItemMeta meta = present.getItemMeta();
 
         if (meta != null) {
             meta.setDisplayName(ChatColor.GOLD + "Present");
-            meta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click to open!", ChatColor.GRAY + "Contains a surprise!"));
+            meta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click to open!", ChatColor.GRAY + "What could be inside?"));
 
             PersistentDataContainer data = meta.getPersistentDataContainer();
             data.set(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
@@ -101,7 +108,33 @@ public class ChristmasEvent implements Listener {
         return present;
     }
 
-    private boolean isPresent(ItemStack item) { // isPresent method
+    public ItemStack createLegendaryPresent() {
+        ItemStack present = new ItemStack(Material.CHEST);
+        ItemMeta meta = present.getItemMeta();
+
+        if (meta != null) {
+            meta.setDisplayName(ChatColor.GOLD + "A Special Present");
+            meta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click to open!", ChatColor.GRAY + "There's something special inside!"));
+
+            PersistentDataContainer data = meta.getPersistentDataContainer();
+            data.set(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING, UUID.randomUUID().toString());
+
+            present.setItemMeta(meta);
+        }
+        return present;
+    }
+
+    private boolean isPresent(ItemStack item) {
+        if (item == null || !item.hasItemMeta()) return false;
+
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return false;
+
+        PersistentDataContainer data = meta.getPersistentDataContainer();
+        return data.has(new NamespacedKey(plugin, "uniqueID"), PersistentDataType.STRING);
+    }
+
+    private boolean isLegendaryPresent(ItemStack item) {
         if (item == null || !item.hasItemMeta()) return false;
 
         ItemMeta meta = item.getItemMeta();
@@ -112,36 +145,53 @@ public class ChristmasEvent implements Listener {
     }
 
     @EventHandler
-    public void onBlockPlace(BlockPlaceEvent e) { // Present placement prevention
-        Player player = e.getPlayer();
+    public void onBlockPlace(BlockPlaceEvent e) {
         ItemStack item = e.getItemInHand();
 
         if (isPresent(item)) {
+            e.setCancelled(true);
+        }
+
+        if (isLegendaryPresent(item)) {
             e.setCancelled(true);
         }
     }
 
     private final List<ItemStack> commonRewards = new ArrayList<>();
     private final List<ItemStack> rareRewards = new ArrayList<>();
+    private final List<ItemStack> legendaryRewards = new ArrayList<>();
 
     public void initializeRewards() {
+        commonRewards.add(new ItemStack(Material.SNOWBALL, 8));
+        commonRewards.add(new ItemStack(Material.COOKIE, 3));
+        commonRewards.add(new ItemStack(Material.SWEET_BERRIES, 2));
+        commonRewards.add(new ItemStack(Material.HONEY_BOTTLE, 1));
         commonRewards.add(new ItemStack(Material.GLOW_BERRIES, 2));
-        commonRewards.add(new ItemStack(Material.SNOWBALL, 3));
-        commonRewards.add(new ItemStack(Material.EGG));
-        commonRewards.add(new ItemStack(Material.WHEAT_SEEDS, 2));
-        commonRewards.add(new ItemStack(Material.KELP));
-        commonRewards.add(new ItemStack(Material.INK_SAC, 2));
-        commonRewards.add(new ItemStack(Material.GLASS_BOTTLE));
-        commonRewards.add(new ItemStack(Material.BOWL));
-        commonRewards.add(new ItemStack(Material.SUGAR, 3));
-        commonRewards.add(new ItemStack(Material.YELLOW_DYE));
+        commonRewards.add(new ItemStack(Material.COAL, 4));
+        commonRewards.add(new ItemStack(Material.EMERALD, 1));
+        commonRewards.add(new ItemStack(Material.PACKED_ICE, 3));
+        commonRewards.add(new ItemStack(Material.SPRUCE_SAPLING, 1));
+        commonRewards.add(new ItemStack(Material.GOLD_NUGGET, 2));
+        commonRewards.add(new ItemStack(Material.IRON_NUGGET, 2));
+        commonRewards.add(new ItemStack(Material.PUMPKIN_PIE, 1));
+        commonRewards.add(new ItemStack(Material.AMETHYST_SHARD, 2));
 
-        rareRewards.add(new ItemStack(Material.DIAMOND));
-        rareRewards.add(new ItemStack(Material.ENDER_PEARL, 2));
-        rareRewards.add(new ItemStack(Material.EMERALD, 5));
-        rareRewards.add(new ItemStack(Material.ANCIENT_DEBRIS));
-        rareRewards.add(new ItemStack(Material.COPPER_INGOT, 10));
-        rareRewards.add(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
+        rareRewards.add(new ItemStack(Material.GOLDEN_CARROT, 4));
+        rareRewards.add(new ItemStack(Material.LEAD, 3));
+        rareRewards.add(new ItemStack(Material.POWDER_SNOW_BUCKET, 1));
+        rareRewards.add(new ItemStack(Material.ICE, 12));
+        rareRewards.add(new ItemStack(Material.TURTLE_SCUTE, 2));
+        rareRewards.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 8));
+        rareRewards.add(new ItemStack(Material.RED_DYE, 6));
+        rareRewards.add(new ItemStack(Material.GREEN_DYE, 6));
+        rareRewards.add(new ItemStack(Material.DARK_OAK_SAPLING, 2));
+
+        legendaryRewards.add(new ItemStack(Material.NAME_TAG, 3));
+        legendaryRewards.add(new ItemStack(Material.NETHER_STAR, 1));
+        legendaryRewards.add(new ItemStack(Material.TRIDENT, 1));
+        legendaryRewards.add(new ItemStack(Material.TOTEM_OF_UNDYING, 1));
+        legendaryRewards.add(new ItemStack(Material.GOLDEN_APPLE, 2));
+        legendaryRewards.add(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1));
     }
 
     private ItemStack getRandomCommonRewards() {
@@ -174,6 +224,21 @@ public class ChristmasEvent implements Listener {
         return randomRareRewards;
     }
 
+    private ItemStack getRandomLegendaryRewards() {
+        if (legendaryRewards.isEmpty()) return null;
+
+        int randomIndexC = ThreadLocalRandom.current().nextInt(legendaryRewards.size());
+        return legendaryRewards.get(randomIndexC).clone();
+    }
+    private List<ItemStack> getLegendaryRewards(int amount) {
+        List<ItemStack> randomLegendaryRewards = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            randomLegendaryRewards.add(getRandomCommonRewards());
+        }
+        return randomLegendaryRewards;
+    }
+
     @EventHandler
     public void onPlayerInteraction(PlayerInteractEvent e) {
         Player player = e.getPlayer();
@@ -184,36 +249,81 @@ public class ChristmasEvent implements Listener {
             e.setCancelled(true);
             player.getInventory().removeItem(item);
 
+            Location loc = player.getLocation().add(0, 1.0, 0);
+            World w = player.getWorld();
+
             Random random = new Random();
             int number = random.nextInt(100);
 
-            if (number < 85) { // 85%
+            if (number < 85) {
                 int rewardCount = ThreadLocalRandom.current().nextInt(1, 3);
                 List<ItemStack> randomCommonRewards = getCommonRewards(rewardCount);
 
                 for (ItemStack reward : randomCommonRewards) {
                     player.getInventory().addItem(reward);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.0f);
+                    Particle.DustOptions red   = new Particle.DustOptions(org.bukkit.Color.fromRGB(200, 30, 30), 1.2f);
+                    Particle.DustOptions green = new Particle.DustOptions(org.bukkit.Color.fromRGB(30, 200, 60), 1.2f);
+                    w.spawnParticle(Particle.DUST, loc, 25, 0.5, 0.6, 0.5, 0.0, red);
+                    w.spawnParticle(Particle.DUST, loc, 25, 0.5, 0.6, 0.5, 0.0, green);
+                    w.spawnParticle(Particle.FIREWORK, loc, 20, 0.4, 0.5, 0.4, 0.01);
                 }
-            } else if (number > 85) { // 15%
-                int rewardCount = 1;
+            } else {
+                int rewardCount = ThreadLocalRandom.current().nextInt(1, 2);
                 List<ItemStack> randomRareReward = getRareRewards(rewardCount);
 
                 for (ItemStack reward : randomRareReward) {
                     player.getInventory().addItem(reward);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1.0f, 1.5f);
+                    w.spawnParticle(Particle.FIREWORK, loc, 40, 0.5, 0.6, 0.5, 0.01);
+                    w.spawnParticle(Particle.HAPPY_VILLAGER,  loc, 15, 0.4, 0.5, 0.4, 0.0);
+                    w.spawnParticle(Particle.END_ROD,         loc, 12, 0.25, 0.35, 0.25, 0.0);
                 }
             }
         }
     }
 
     @EventHandler
-    public void christmasEventDeath(EntityDeathEvent e) {
-        boolean christmasEnabled = plugin.getConfig().getBoolean("christmas_event", false);
-        if (christmasEnabled) {
-            if (Math.random() < 0.1) { // 10%
-                e.getDrops().add(createPresent());
+    public void onPlayerInteractionLegendary(PlayerInteractEvent e) {
+        Player player = e.getPlayer();
+        Action action = e.getAction();
+        ItemStack item = e.getItem();
+
+        Location loc = player.getLocation().add(0, 1.0, 0);
+        World w = player.getWorld();
+
+        if ((action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && isLegendaryPresent(item)) {
+            e.setCancelled(true);
+            player.getInventory().removeItem(item);
+
+            int rewardCount = ThreadLocalRandom.current().nextInt(1, 1);
+            List<ItemStack> randomLegendaryRewards = getLegendaryRewards(rewardCount);
+
+            for (ItemStack reward : randomLegendaryRewards) {
+                player.getInventory().addItem(reward);
+                player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST_FAR, 1.0f, 2.0f);
+                w.spawnParticle(Particle.TOTEM_OF_UNDYING, loc, 40, 0.6, 0.7, 0.6, 0.0);
+                w.spawnParticle(Particle.FIREWORK,  loc, 60, 0.7, 0.8, 0.7, 0.02);
+                w.spawnParticle(Particle.END_ROD,          loc, 20, 0.3, 0.4, 0.3, 0.0);
+                w.spawnParticle(Particle.EXPLOSION, loc, 1, 0, 0, 0, 0.0);
             }
+        }
+    }
+
+    @EventHandler
+    public void christmasEventDeath(EntityDeathEvent e) {
+        boolean christmasEnabled = plugin.getConfig().getBoolean("christmas_event", true);
+        if (!christmasEnabled) return;
+
+        LivingEntity ent = e.getEntity();
+
+        if (ent.getScoreboardTags().contains("santa_claus")) {
+            e.getDrops().add(createLegendaryPresent());
+            return;
+        }
+
+        if (Math.random() < 0.08) {
+            e.getDrops().add(createPresent());
         }
     }
 }

@@ -43,7 +43,7 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
         config.addDefault("glowstone_perc", 10);
         config.addDefault("glowstone_amount", 1);
         config.addDefault("glowstone_drop", true);
-        config.addDefault("christmas_event", false);
+        config.addDefault("christmas_event", true);
     }
 
     @Override
