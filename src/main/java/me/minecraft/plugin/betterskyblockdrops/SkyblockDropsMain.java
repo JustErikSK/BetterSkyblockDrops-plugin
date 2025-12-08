@@ -13,12 +13,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
 
 public final class SkyblockDropsMain extends JavaPlugin implements Listener {
+
+    private ChristmasEvent christmasEvent;
+
     @Override
     public void onEnable() {
         getLogger().info("Loading drop percentages and amount...");
         getLogger().info("Loading the Christmas Event class...");
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "BetterSkyblockDrops >> Plugin has been enabled!");
         this.getServer().getPluginManager().registerEvents(this, this);
+        christmasEvent = new ChristmasEvent(this);
+        getServer().getPluginManager().registerEvents(christmasEvent, this);
         saveDefaultConfig();
 
         FileConfiguration config = this.getConfig();
