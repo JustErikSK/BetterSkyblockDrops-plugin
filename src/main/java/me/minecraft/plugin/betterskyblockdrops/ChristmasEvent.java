@@ -1,13 +1,11 @@
 package me.minecraft.plugin.betterskyblockdrops;
 
 import org.bukkit.*;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -357,18 +355,15 @@ public class ChristmasEvent implements Listener {
 
         if (ent.getScoreboardTags().contains("santa_claus")) {
             e.getDrops().add(createLegendaryPresent());
-            plugin.getLogger().info("Legendary Present");
             return;
         }
 
         if (Math.random() < 0.08) {
             e.getDrops().add(createCommonPresent());
-            plugin.getLogger().info("Common Present");
         }
 
         if (Math.random() > 0.08 && Math.random() < 0.15) {
             e.getDrops().add(createRarePresent());
-            plugin.getLogger().info("Rare Present");
         }
     }
 }

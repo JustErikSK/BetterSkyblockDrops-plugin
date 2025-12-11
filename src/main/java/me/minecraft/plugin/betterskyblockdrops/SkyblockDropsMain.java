@@ -18,7 +18,7 @@ public final class SkyblockDropsMain extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        getLogger().info("Loading drop percentages and amount...");
+        getLogger().info("Loading drop percentages and amounts...");
         getLogger().info("Loading the Christmas Event class...");
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "BetterSkyblockDrops >> Plugin has been enabled!");
         this.getServer().getPluginManager().registerEvents(this, this);
