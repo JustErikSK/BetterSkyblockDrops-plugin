@@ -58,5 +58,5 @@ glowstone_perc: 10
 glowstone_amount: 1
 glowstone_drop: true
 
-# Version 2.6 works for MC versions 1.21 - 26.1
+# Version 2.6 works for MC versions 1.21 - 26.1.1
 # End of config file

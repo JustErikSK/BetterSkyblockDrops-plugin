@@ -23,4 +23,4 @@ _Values are accurate from version v2.6!_
 - **Ancient Debris - from Withers** _(100% for 4)_ - 1.16 and above
 - **Magma Cream - from Zombified Piglins** _(10% for 1)_ - 1.13 and above
 
-This plugin works on Minecraft versions 1.8 - 26.1 (the newest version works only on 1.21 - 26.1)
+This plugin works on Minecraft versions 1.8 - 26.1 (the newest version works only on 1.21 - 26.1.1)
