@@ -58,8 +58,5 @@ glowstone_perc: 10
 glowstone_amount: 1
 glowstone_drop: true
 
-# Rules for events:
-christmas_event: true
-
-# Version 2.5 works for MC versions 1.21 - 1.21.11
+# Version 2.6 works for MC versions 1.21 - 26.1
 # End of config file
