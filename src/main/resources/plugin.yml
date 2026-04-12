@@ -1,5 +1,5 @@
 name: BetterSkyblockDrops
-version: 2.6
+version: 2.6.1
 main: me.minecraft.plugin.betterskyblockdrops.SkyblockDropsMain
 api-version: 26.1
 authors: [ JustErikSK ]
